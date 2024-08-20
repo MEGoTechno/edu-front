@@ -1,0 +1,109 @@
+import React from 'react'
+import MakeForm from '../../tools/makeform/MakeForm'
+import gradeConstants from '../../settings/constants/gradeConstants'
+import governments from '../../settings/constants/governments'
+
+// icons
+import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
+import { MdMarkEmailRead } from "react-icons/md";
+import { FaSquarePhoneFlip } from "react-icons/fa6";
+import { PiPhoneDisconnectFill } from "react-icons/pi";
+import { IoSchool } from "react-icons/io5";
+import { RiGovernmentFill } from "react-icons/ri";
+import { CiBarcode } from "react-icons/ci";
+import { TbPasswordUser } from "react-icons/tb";
+import { useSignupMutation } from '../../toolkit/apis/usersApi';
+import usePostData from '../../hooks/usePostData';
+
+import { lang } from '../../settings/constants/arlang';
+// constants
+
+
+const gradeOptions = () => {
+    let options = []
+    gradeConstants.map(grade => {
+        options.push({
+            label: grade.name, value: grade.index
+        },
+        )
+    })
+
+    return options
+}
+
+const governmentsOptions = () => {
+    let options = []
+    governments.map(governorate => {
+        options.push({
+            label: governorate.governorate_name_ar, value: governorate.id
+        },
+        )
+    })
+
+    return options
+}
+
+function SignupForm() {
+
+    const inputs = [
+        {
+            name: 'name',
+            label: lang.NAME,
+            width: { xs: '100%', md: '49%' },
+            icon: <MdOutlineDriveFileRenameOutline color='green' />,
+        }, {
+            name: 'email',
+            label: lang.EMAIL,
+            width: { xs: '100%', md: '49%' },
+            type: 'email',
+            icon: <MdMarkEmailRead color='green' />,
+        }, {
+            name: 'phone',
+            label: lang.PHONE,
+            width: { xs: '100%', md: '49%' },
+            icon: <FaSquarePhoneFlip color='green' />
+        }, {
+            name: 'familyPhone',
+            label: lang.FAMILY_PHONE,
+            width: { xs: '100%', md: '49%' },
+            icon: <PiPhoneDisconnectFill color='green' />
+        }, {
+            name: 'grade',
+            label: lang.GRADE,
+            type: 'select',
+            options: gradeOptions(),
+            icon: <IoSchool color='green' />,
+        }, {
+            name: 'government',
+            label: lang.GOVERNMENT,
+            type: 'select',
+            options: governmentsOptions(),
+            icon: <RiGovernmentFill color='green' />
+        }, {
+            name: 'code',
+            label: lang.CODE_optional,
+            icon: <CiBarcode color='green' />
+        }, {
+            name: 'password',
+            label: lang.PASSWORD,
+            icon: <TbPasswordUser color='green' />
+        }, {
+            name: 'confirmPassword',
+            label: lang.CONFIRM_PASSWORD,
+            icon: <TbPasswordUser color='green' />
+        },
+    ]
+
+    const [sendData, status] = useSignupMutation()
+    const [signupFc] = usePostData(sendData)
+
+    const onSubmit = async (values) => {
+        const res = await signupFc(values)
+        console.log(res)
+    }
+    return (
+        <MakeForm inputs={inputs} onSubmit={onSubmit} btnWidth={'100%'} status={status} />
+    )
+}
+
+export default SignupForm

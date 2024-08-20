@@ -1,0 +1,57 @@
+import { Box, useTheme } from '@mui/material'
+import React from 'react'
+import Section from '../../style/mui/styled/Section'
+import BannerAuth from '../../components/ui/BannerAuth'
+import { FlexRow } from '../../style/mui/styled/Flexbox'
+import TextBorderAround from '../../components/ui/TextBorderAround'
+
+import { FaFileSignature } from "react-icons/fa6";
+import SignupForm from '../../components/auth/SignupForm'
+
+
+const BUILD = "انشاء"
+const ACCOUNT = 'حساب'
+
+
+function SignupPage() {
+
+    const theme = useTheme()
+
+    return (
+        <Section sx={{ minHeight: '86vh' }}>
+
+            <FlexRow height={'100%'} justifyContent={'space-evenly'}>
+
+                {/* banner */}
+                <BannerAuth />
+
+                {/* signup form */}
+                <Box sx={{
+                    maxWidth: {xs: "400px", lg: '600px'}
+                }}>
+                    {/* signup title */}
+                    <FlexRow sx={{ justifyContent: 'center', my: '2rem' }}>
+
+                        <TextBorderAround>
+
+                            <span style={{ color: theme.palette.neutral[0] }}> {BUILD} </span>
+                            <span style={{ marginRight: '10px', marginLeft: '10px' }}> {ACCOUNT}</span>
+
+                            <FaFileSignature size='2rem' />
+                        </TextBorderAround>
+
+                    </FlexRow>
+
+                    {/* signup form */}
+                    <SignupForm />
+
+                </Box>
+
+            </FlexRow>
+
+            {/* form */}
+        </Section >
+    )
+}
+
+export default SignupPage
