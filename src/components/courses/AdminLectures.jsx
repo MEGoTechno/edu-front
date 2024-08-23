@@ -1,9 +1,9 @@
 import React, { memo, useEffect, useState } from 'react'
 import CardStyled from '../../style/mui/styled/CardStyled'
 import Grid from '../../style/vanilla/Grid'
-import SectionTitle from '../section_title/SectionTitle'
+import TitleSection from '../ui/TitleSection'
 import { Alert, Box, Divider, Typography } from '@mui/material'
-import TitleWithDividers from '../section_title/TitleWithDividers'
+import TitleWithDividers from '../ui/TitleWithDividers'
 
 import { useLazyGetLecturesQuery } from '../../toolkit/apis/lecturesApi'
 import useLazyGetData from "../../hooks/useLazyGetData"

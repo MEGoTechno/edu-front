@@ -20,6 +20,7 @@ import { LoginIcon, SignupIcon } from './Icons';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import RowInfo from '../ui/RowInfo';
 
 
 function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
@@ -37,7 +38,6 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
     }
 
     const user = useSelector(s => s.global.user)
-
     return (
         <AppBar sx={{
             position: 'sticky', top: 0,
@@ -86,20 +86,25 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
                     )}
 
                     {user?.role && (
-                        <Box>
-                            <IconButton sx={{
-                                mx: '6px'
-                            }}>
-                                <NotificationsIcon sx={{
-                                    color: 'primary.main'
-                                }} />
-                            </IconButton>
-                            <IconButton>
-                                <AccountCircle sx={{
-                                    color: 'primary.main'
-                                }} />
-                            </IconButton>
-                        </Box>
+                        <>
+                            <RowInfo title={'wallet'} desc={user.wallet || 0} />
+                            <Box>
+
+                                <IconButton sx={{
+                                    mx: '6px'
+                                }}>
+                                    <NotificationsIcon sx={{
+                                        color: 'primary.main'
+                                    }} />
+                                </IconButton>
+
+                                <IconButton>
+                                    <AccountCircle sx={{
+                                        color: 'primary.main'
+                                    }} />
+                                </IconButton>
+                            </Box>
+                        </>
                     )}
 
                 </FlexRow>

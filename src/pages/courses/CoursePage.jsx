@@ -1,51 +1,138 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderContent from '../../components/ui/HeaderContent'
 import Section from '../../style/mui/styled/Section'
 import { ExamIcon, ExamIconOutlined, FilesIcon, FilesIcon2, FilesIconWithLamp, VidsIcon2 } from '../../components/ui/svg/ContentSvgs'
-import { Box } from '@mui/material'
+import { Box, Link } from '@mui/material'
 import CardCourse from '../../components/ui/CardCourse'
 import RowInfo from '../../components/ui/RowInfo'
 import { FilledHoverBtn } from '../../style/mui/btns/buttonsStyles'
 import { AiFillPoundCircle } from 'react-icons/ai'
-import SectionTitle from '../../components/section_title/SectionTitle'
+import TitleSection from '../../components/ui/TitleSection'
 import AccordionStyled from '../../style/mui/styled/AccordionStyled'
 import CardHover from '../../components/ui/CardHover'
 import Grid from '../../style/vanilla/Grid'
+import { useLazyGetCoursesQuery } from '../../toolkit/apis/coursesApi'
+import useLazyGetData from '../../hooks/useLazyGetData'
+import usePostData from '../../hooks/usePostData'
+import { useLocation, useParams } from 'react-router-dom'
+import { useLazyGetLecturesCountQuery } from '../../toolkit/apis/statisticsApi'
+import InfoInCircle from '../../components/ui/InfoInCircle'
+import TabInfo from '../../components/ui/TabInfo'
+import { FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
+import Separator from '../../components/ui/Separator'
+import { useLazyGetLecturesQuery } from '../../toolkit/apis/lecturesApi'
+import { useGetUserCoursesQuery, useSubscribeMutation } from '../../toolkit/apis/userCoursesApi'
+import { useSelector } from 'react-redux'
+import ModalStyled from '../../style/mui/styled/ModalStyled'
+import Loader from '../../style/mui/loaders/Loader'
+import WrapperHandler from '../../tools/WrapperHandler'
+import CourseSubscribeCard from '../../components/courses/CourseSubscribeCard'
 
 function CoursePage() {
 
   const [expand, setExpand] = useState(false)
+  const [course, setCourse] = useState(null)
+
+  const params = useParams()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.state) setCourse(location.state)
+  }, [location])
+
+
+
+  const [getData] = useLazyGetCoursesQuery()
+  const [getCourse] = useLazyGetData(getData)
+
+  useEffect(() => {
+    const trigger = async () => {
+      const res = await getCourse({ index: params.courseId })
+      setCourse(res.courses[0])
+    }
+    if (!location.state) {
+      trigger()
+    }
+  }, [course, location])
+
+
+
+  const [counts, setCounts] = useState({ lectures: 0, files: 0, exams: 0 })
+  const [getLecturesStat] = useLazyGetLecturesCountQuery()
+  const [getLecturesCount] = useLazyGetData(getLecturesStat)
+
+  useEffect(() => {
+
+    const trigger = async () => {
+      const res = await getLecturesCount({ course: course._id })
+      setCounts({ ...counts, lectures: res.count })
+    }
+
+    if (course) {
+      trigger()
+    }
+
+  }, [course, location])
+
+
+  const [lectures, setLectures] = useState([])
+  const [getLecturesFc] = useLazyGetLecturesQuery()
+  const [getLectures] = useLazyGetData(getLecturesFc)
+
+  useEffect(() => {
+    const trigger = async () => {
+      const res = await getLectures({ course: course?._id })
+      setLectures([...res.lectures])
+    }
+    if (expand && lectures.length === 0) {
+      trigger()
+    }
+
+  }, [course, expand])
+
+  //is Subscribed
+
+
+  if (!course) return <>loading ...</>
+
   return (
     <Section>
-      <HeaderContent title={'Course NAme is here'} body={'course body is here'}
+      <HeaderContent title={course.name} body={<span dangerouslySetInnerHTML={{ __html: course.description }} />}
         infos={[
           {
-            caption: 'lectures', desc: '+ 4', icon: <VidsIcon2 size='1.5rem' />
+            caption: 'lectures', desc: '+ ' + counts.lectures, icon: <VidsIcon2 size='1.5rem' />
           }, {
-            caption: 'Files', desc: '+ 4', icon: <FilesIcon size='1.5rem' />
+            caption: 'Files', desc: '+ 0', icon: <FilesIcon size='1.5rem' />
           }, {
-            caption: 'Exams', desc: '+ 4', icon: <ExamIcon size='1.5rem' />
+            caption: 'Exams', desc: '+ 0', icon: <ExamIcon size='1.5rem' />
           }
         ]}
       >
-        <CardCourse img={'/assets/1st.jpg'} title={'some name'} desc="سعر الكورس: 20 نحنوحا" borderColor="transparent">
-          <RowInfo title={'سعر الكورس'} desc="20 حنيها" icon={<AiFillPoundCircle />} />
-          <RowInfo title={"course start"} desc="20 حنيها" icon={<AiFillPoundCircle />} />
-
-          <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} >subscribe now</FilledHoverBtn></CardCourse>
+        {course ?
+          <CourseSubscribeCard course={course} />
+          : <Loader />}
       </HeaderContent>
 
-      <SectionTitle title={'course content'} />
+      <TitleSection title={'course content'} />
 
       <Box >
         <AccordionStyled title={'lectures'} setExpanded={setExpand} expanded={expand}>
           <Grid>
-            <CardHover img={'/assets/2nd.jpg'} title={'lecture 1'} desc={'some infooos'} to={'lectures/1'} />
-            <CardHover img={'/assets/2nd.jpg'} title={'lecture 1'} desc={'some infooos'} />
-            <CardHover img={'/assets/2nd.jpg'} title={'lecture 1'} desc={'some infooos'} />
+
+            {lectures.length === 0 ? "no" : lectures.map((lecture, i) => {
+              return <CardHover key={i} img={lecture?.thumbnail?.url || '/assets/3rd.jpg'} title={lecture?.name} desc={<span dangerouslySetInnerHTML={{ __html: lecture.description }} />} to={'lectures/' + lecture._id} >
+                <FlexColumn>
+                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                </FlexColumn>
+              </CardHover>
+            })}
+
           </Grid>
         </AccordionStyled>
       </Box>
+
     </Section>
   )
 }

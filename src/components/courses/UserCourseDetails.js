@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Box, Button, Typography } from '@mui/material'
 import { RtArrow } from '../header/Icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { CoursesIcon, ExamIcon, ExamIconOutlined, FilesIcon, VidsIcon, VidsIcon2 } from '../ui/svg/ContentSvgs'
 import { GoFileSubmodule } from "react-icons/go";
@@ -25,7 +25,12 @@ import { FilledHoverBtn, OutLinedHoverBtn } from '../../style/mui/btns/buttonsSt
 
 function UserCourseDetails({ course }) {
 
+    const navigate = useNavigate()
 
+    const goCourse = (e) => {
+        e.preventDefault()
+        navigate("courses/" + course.index, { state: course })
+    }
     const [getData] = useLazyGetLecturesCountQuery()
     const [getLecturesCount] = useLazyGetData(getData)
 
@@ -46,7 +51,7 @@ function UserCourseDetails({ course }) {
 
     return (
         <CardStyled img={'/assets/3rd.jpg'} title={<Button startIcon={<RtArrow size='1.5rem' />} endIcon={<CoursesIcon size='1.5rem' />} sx={{ color: 'primary.main' }}
-            component={Link} to={"courses/" + course.index}
+            component={Link} to={"courses/" + course.index} onClick={goCourse}
         >
 
             {/* course Name */}

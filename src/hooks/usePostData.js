@@ -41,7 +41,9 @@ export default function usePostData(sendData) {
         }
 
         // in success
-        dispatch(setGlobalMsg({ message: res.data?.message, severity: "success" }))
+        if (res.data?.message) {
+          dispatch(setGlobalMsg({ message: res.data?.message, severity: "success" }))
+        }
         resolve(res?.data?.values)
 
       } catch (error) {

@@ -37,7 +37,6 @@ function UnitCourses({ unit }) {
         <AccordionStyled title={unit.name} bgcolor="background.alt" expanded={open} setExpanded={setOpen}>
             <Grid>
                 {courses.map((course, i) => <UserCourseDetails key={i} course={course} />)}
-                {courses.map((course, i) => <UserCourseDetails key={i} course={course} />)}
             </Grid>
         </AccordionStyled>
     )

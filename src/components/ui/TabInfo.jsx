@@ -3,7 +3,7 @@ import './tabInfo.css'
 import { Box, Typography } from '@mui/material'
 
 let m = 0
-function TabInfo({ count, i, title, icon, isBold = true }) {
+function TabInfo({ count, i, title, icon, isBold = true, sx }) {
 
     const colors = ["#fff", "#118D57", "#B76E00", "#B71D18"]
     const bgColors = ["#1C252E", "rgba(34 197 94 / 0.16)", "rgba(255 171 0 / 0.16)", "rgba(255 86 48 / 0.16)"]
@@ -18,7 +18,8 @@ function TabInfo({ count, i, title, icon, isBold = true }) {
                 alignItems: "center",
                 flexDirection: 'row',
                 flexWrap: 'nowrap',
-                gap: '8px'
+                gap: '8px',
+                ...sx
             }} >
 
             {icon}

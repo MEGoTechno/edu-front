@@ -22,8 +22,8 @@ export default function ModalStyled({ open, setOpen, title, desc, children, acti
     };
 
     const onAction = async()=> {
-        await action()
         setOpen(false)
+        await action()
     }
     return (
         <React.Fragment>

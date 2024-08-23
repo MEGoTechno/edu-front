@@ -4,7 +4,7 @@ import { DeviconUnity, UnitIcon } from '../grades/Icons'
 import { FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
 import { Link } from 'react-router-dom'
 
-function CardHover({ img, title, desc, to }) {
+function CardHover({ img, title, desc, to, children }) {
 
     const theme = useTheme()
 
@@ -41,13 +41,11 @@ function CardHover({ img, title, desc, to }) {
                     sx={{
                         position: 'relative',
                         zIndex: 8,
-                        borderRadius: '16px', bgcolor: 'none', minWidth: '250px',
-
+                        borderRadius: '16px', bgcolor: 'none', minWidth: '250px', maxHeight: '250px'
                     }}
-
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h4" component="div" noWrap>
+                <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="div" fontWeight={'700'} >
                         {title}
                     </Typography>
                     <Divider sx={{ borderColor: 'primary.main', borderWidth: '2px', my: '16px', borderRadius: '16px' }} />
@@ -57,6 +55,7 @@ function CardHover({ img, title, desc, to }) {
                             {desc}
                         </Typography>
                     </FlexRow>
+                    {children}
                 </CardContent>
             </CardActionArea>
         </Card >

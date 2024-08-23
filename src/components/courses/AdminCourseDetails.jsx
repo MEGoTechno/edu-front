@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import TitleWithDividers from '../section_title/TitleWithDividers'
+import TitleWithDividers from '../ui/TitleWithDividers'
 import { FlexBetween, FlexColumn } from '../../style/mui/styled/Flexbox'
 import { OutLinedHoverBtn } from '../../style/mui/btns/buttonsStyles'
 import TabInfo from '../ui/TabInfo'

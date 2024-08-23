@@ -15,7 +15,6 @@ import { AiFillPoundCircle } from "react-icons/ai";
 export default function CardCourse({ img, title, children, borderColor }) {
 
   const theme = useTheme()
-  console.log(theme)
   return (
     <Box
       sx={{
@@ -61,11 +60,7 @@ export default function CardCourse({ img, title, children, borderColor }) {
 
         <FlexColumn gap={'5px'}>
           {children}
-
-
         </FlexColumn>
-
-
       </Box>
     </Box >
   );

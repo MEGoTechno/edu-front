@@ -16,6 +16,7 @@ import { manageCoursesRoutes } from "./manageCoursesRoutes";
 
 import { codesRoutes } from "./codesRoutes";
 import LectureCreate from "../../components/courses/LectureCreate";
+import { userRoutes } from "./userRoutes";
 
 export const routes = [
     {
@@ -24,6 +25,9 @@ export const routes = [
             {
                 index: true, element: <HomePage />
             }, {
+                path: '/user', children: userRoutes
+            },
+            {
                 path: '/grades', children: gradesRoutes,
             }, {
                 path: '/management/users', children: manageUserRoutes,

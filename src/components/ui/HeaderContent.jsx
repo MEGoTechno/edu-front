@@ -33,7 +33,7 @@ function HeaderContent({ title, body, infos = [], img, children, height = '86vh'
                         {body} <br />
                     </Typography>
 
-                    <FlexRow sx={{ width: '100%', position: 'relative', gap: '10px', justifyContent: 'center' }}>
+                    <FlexRow sx={{ width: '100%', position: 'relative', gap: '10px', justifyContent: 'center', mb: '200px', mt: '40px' }}>
                         {infos.length > 0 && infos.map((info, i) => (
                             <CardInfo key={i} icon={info.icon} caption={info.caption} desc={info.desc} />
                         ))}

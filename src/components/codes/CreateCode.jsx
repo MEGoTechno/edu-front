@@ -16,7 +16,7 @@ function CreateCode({setReset}) {
     const [createCode] = usePostData(sendData)
 
 
-    const [type, setType] = useState(codeConstants.ACTIVATE)
+    const [type, setType] = useState()
 
     const activateInput = [
         {

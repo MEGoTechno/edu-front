@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import HeaderContent from '../../components/ui/HeaderContent'
 
 import Section from "../../style/mui/styled/Section"
-import SectionTitle from '../../components/section_title/SectionTitle'
+import TitleSection from '../../components/ui/TitleSection'
 import { LoginAnimatedIcon, ReactLoginIcon } from '../../components/ui/svg/Registers'
 import LoginForm from '../../components/auth/LoginForm'
 import { Box, Typography, useTheme } from '@mui/material'

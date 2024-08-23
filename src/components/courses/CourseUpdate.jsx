@@ -37,14 +37,30 @@ function CourseUpdate({ course }) {
             name: 'price',
             label: lang.PRICE,
             value: course.price,
-            icon: <AiFillPoundCircle />
+            icon: <AiFillPoundCircle />,
+            width: "40%"
+        }, {
+            name: 'discount',
+            label: lang.PRICE,
+            value: course.price,
+            icon: <AiFillPoundCircle />,
+            width: "40%",
+        },{
+            name: 'isDiscount',
+            label: lang.PRICE,
+            value: false,
+            icon: <AiFillPoundCircle />,
+            width: "10%",
+            type: 'switch'
         }, {
             name: 'isActive',
             label: lang.IS_ACTIVE,
             type: 'radio',
             value: `${course.isActive || false}`,
             options: [{ value: true, label: lang.ACTIVE }, { value: false, label: lang.NOT_ACTIVE }],
-            icon: <VscSymbolBoolean />
+            icon: <VscSymbolBoolean />,
+            width: "100%",
+
         }
     ]
 

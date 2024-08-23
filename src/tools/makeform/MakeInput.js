@@ -1,6 +1,6 @@
-import { Box, FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, Select, Switch, TextField, Typography } from '@mui/material'
 import { ErrorMessage, FastField, Field, useField } from 'formik'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import MakeFieldArray from './MakeFieldArray'
 import MakeRadio from './components/MakeRadio'
@@ -16,6 +16,7 @@ import MakeSelectRef from './components/MakeSelectRef'
 import MakeChoosed from './components/MakeChoosed'
 import MakeFullDate from './components/MakeFullDate'
 import Text from '../text/Text'
+import MakeSwitch from './components/MakeSwitch'
 
 
 const m = '6px 0'
@@ -35,9 +36,7 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
     }
 
     if (input?.type === "header") {
-        return <Box>
-            <MakeTitle title={input.title} />
-        </Box>
+        return <MakeTitle title={input.title} />
     }
 
     if (input?.type === "array") {
@@ -46,9 +45,7 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
 
     if (input?.type === "radio") { // done
         return (
-            <Box>
-                <MakeRadio inputName={inputName} input={input} props={props} />
-            </Box>
+            <MakeRadio inputName={inputName} input={input} props={props} />
         )
     }
 
@@ -59,17 +56,13 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
     }
 
     if (input.type === 'fullDate') {
-        return <Box m={"10px 0"}>
-            <MakeFullDate inputName={inputName} props={props} value={value} input={input} />
-        </Box>
+        return <MakeFullDate inputName={inputName} props={props} value={value} input={input} />
     }
 
     if (input.type === "select") { //done
 
         return (
-            <Box m={m} width={'100%'}>
-                <MakeSelect props={props} inputName={inputName} input={input} value={value} />
-            </Box>
+            <MakeSelect props={props} inputName={inputName} input={input} value={value} />
         )
     }
 
@@ -90,13 +83,15 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
         </div>
     }
 
+    if (input.type === 'switch') {
+        return <MakeSwitch input={input} props={props} inputName={inputName} />
+    }
     return (
         <FastField
             as={TextField}
             sx={{
-                m: "6px 0",
                 display: input.hidden && "none",
-                width: input.width ? input.width : "100%",
+                width: "100%",
                 direction: input.direction || 'ltr'
             }}
 

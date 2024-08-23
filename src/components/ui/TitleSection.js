@@ -6,13 +6,13 @@ import { FlexBetween, FlexRow } from '../../style/mui/styled/Flexbox'
 const lineStyle = (width) => {
 
     return {
-        width: width || '500px', height: "20px", borderRadius: '8px', bgcolor: 'grey.300', my: 1, opacity: .2
+        maxWidth: width || '500px', height: "20px", borderRadius: '8px', bgcolor: 'grey.300', my: 1, opacity: .2
     }
 }
 
-function SectionTitle({ title, icon }) {
+function TitleSection({ title, icon }) {
     return (
-        <Box width={'100%'}  my={'32px'}>
+        <Box width={'100%'} my={'32px'}>
             <Box>
                 <Box sx={lineStyle("500px")}> </Box>
                 <Box sx={lineStyle("250px")}> </Box>
@@ -34,4 +34,4 @@ function SectionTitle({ title, icon }) {
     )
 }
 
-export default SectionTitle
+export default TitleSection

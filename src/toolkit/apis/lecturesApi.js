@@ -14,6 +14,16 @@ const lecturesApi = apiSlice.injectEndpoints({
                 }
             }
         }),
+        getOneLecture: builder.query({
+            query: (queries) => {
+                const params = queries
+
+                return {
+                    url: "/content/lectures/" + params.lecture,
+                    params
+                }
+            }
+        }),
         createLecture: builder.mutation({
             query: data => ({
                 url: '/content/lectures',
@@ -30,8 +40,16 @@ const lecturesApi = apiSlice.injectEndpoints({
                 })
             }
         }),
+        getSecureVideo: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/content/lectures/' + data.lecture + '/secure_video',
+                    method: 'POST', body: data
+                }
+            }
+        })
 
     })
 })
 //السلام عليكم و رحمه الله وبركاته:
-export const { useLazyGetLecturesQuery, useCreateLectureMutation, useUpdateLectureMutation } = lecturesApi
+export const { useLazyGetLecturesQuery, useLazyGetOneLectureQuery, useCreateLectureMutation, useUpdateLectureMutation, useGetSecureVideoMutation } = lecturesApi

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import React, { memo, useEffect } from 'react'
 
-function MakeSelect({ title, value, setValue, options, reset = []}) {
+function MakeSelect({ title, value, setValue, options, reset = [] }) {
 
 
     useEffect(() => {
@@ -20,9 +20,14 @@ function MakeSelect({ title, value, setValue, options, reset = []}) {
                 onChange={(e, newValue) => { setValue(e.target.value) }}
             >
                 {options?.map((option, i) => {
-                    return (
-                        <MenuItem key={i} value={option.value}>{option.label}</MenuItem>
-                    )
+                    if (option.value) {
+                        return <MenuItem key={i} value={option.value}>{option.label}</MenuItem>
+
+                    } else {
+                        return (
+                            <MenuItem key={i} value={option}>{option}</MenuItem>
+                        )
+                    }
                 })}
             </Select>
         </FormControl>

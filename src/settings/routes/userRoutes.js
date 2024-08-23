@@ -1,4 +1,6 @@
-const userRoutes = [
+import RechargeCodePage from "../../pages/codes/RechargeCodePage";
+
+export const userRoutes = [
     {
         path: '/user/profile', element: <>profile is here</>
     },
@@ -8,6 +10,6 @@ const userRoutes = [
     {
         path: '/user/statistics', element: <>profile is here</>
     }, {
-        path: '/user/codes', element: <>profile is here</>
+        path: '/user/recharge_code', element: <RechargeCodePage />
     }
 ]

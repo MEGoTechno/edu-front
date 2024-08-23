@@ -5,7 +5,7 @@ import { FlexBetween, FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox
 import CardInfo from '../../style/mui/components/CardInfo'
 import gradeConstants from '../../settings/constants/gradeConstants'
 import AccordionStyled from '../../style/mui/styled/AccordionStyled'
-import SectionTitle from '../../components/section_title/SectionTitle'
+import TitleSection from '../../components/ui/TitleSection'
 import HeaderContent from '../../components/ui/HeaderContent'
 import { RtArrow } from '../../components/header/Icons'
 import { Link, useParams } from 'react-router-dom'
@@ -54,7 +54,7 @@ function UnitsPage() {
       <GradeHeader gradeId={gradeId} />
 
       <Box minHeight={'100vh'} sx={{ padding: '8px' }}>
-        <SectionTitle title={lang.GRADE_CONTENT} />
+        <TitleSection title={lang.GRADE_CONTENT} />
 
 
         {status.isLoading ? <LoaderSkeleton /> :

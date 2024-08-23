@@ -9,17 +9,17 @@ export const sidebarLinks = [
     {
         name: "انشاء حساب", icon: <SignupIcon size="22px" />, to: "/signup",
     }, {
-        name: "الكورسات", icon: <SignupIcon size="22px" />, to: "/grades", allowedTo: [user_roles.STUDENT]
+        name: "الكورسات", icon: <SignupIcon size="22px" />, to: "/grades", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "محاضراتى", icon: <SignupIcon size="22px" />, to: "/courses", allowedTo: [user_roles.STUDENT]
+        name: "محاضراتى", icon: <SignupIcon size="22px" />, to: "/courses", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "اداره الحساب", allowedTo: [user_roles.STUDENT]
+        name: "اداره الحساب", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "حسابى", icon: <SignupIcon size="22px" />, to: "/profile", allowedTo: [user_roles.STUDENT]
+        name: "حسابى", icon: <SignupIcon size="22px" />, to: "/profile", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "شحن كود", icon: <SignupIcon size="22px" />, to: "/user/codes", allowedTo: [user_roles.STUDENT]
+        name: "شحن كود", icon: <SignupIcon size="22px" />, to: "/user/recharge_code", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "مدفوعاتى", icon: <SignupIcon size="22px" />, to: "/user/payments", allowedTo: [user_roles.STUDENT]
+        name: "مدفوعاتى", icon: <SignupIcon size="22px" />, to: "/user/payments", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
         name: "إدارة الطلاب", icon: <SignupIcon size="22px" />, allowedTo: [user_roles.ADMIN, user_roles.SUBADMIN]
     }, {

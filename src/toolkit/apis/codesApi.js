@@ -3,6 +3,13 @@ import { apiSlice } from "../apiSlice";
 const codesApi = apiSlice.injectEndpoints({
     endpoints: builder => ({
 
+        verifyCode: builder.mutation({
+            query: data => ({
+                url: '/codes/verify',
+                method: 'POST',
+                body: data
+            })
+        }),
         getCodes: builder.query({
             query: (queries) => {
                 const params = queries
@@ -52,6 +59,6 @@ const codesApi = apiSlice.injectEndpoints({
 })
 
 
-export const { useLazyGetCodesQuery, useLazyGetOneCodeQuery,
+export const { useVerifyCodeMutation, useLazyGetCodesQuery, useLazyGetOneCodeQuery,
     useCreateCodeMutation, useUpdateCodeMutation, useDeleteCodeMutation
 } = codesApi

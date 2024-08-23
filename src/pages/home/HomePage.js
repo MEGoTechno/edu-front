@@ -2,7 +2,7 @@ import { Box, Divider, Typography } from '@mui/material'
 
 import { motion } from 'framer-motion'
 import Hero from '../../components/hero/Hero'
-import SectionTitle from '../../components/section_title/SectionTitle'
+import TitleSection from '../../components/ui/TitleSection'
 import Services from '../../components/services/Services'
 import Section from '../../style/mui/styled/Section'
 import Grades from '../../components/grades/Grades'
@@ -55,7 +55,7 @@ function HomePage({ px }) {
 
       {/*  services */}
       <Section>
-        <SectionTitle title={'نجاحك مهمتنا'} />
+        <TitleSection title={'نجاحك مهمتنا'} />
       </Section>
 
       <Box sx={{ bgcolor: 'transparent' }}>
@@ -66,7 +66,7 @@ function HomePage({ px }) {
 
       {/*  grades */}
       <Section>
-        <SectionTitle title={'grades'} />
+        <TitleSection title={'grades'} />
       </Section>
 
       <Section>

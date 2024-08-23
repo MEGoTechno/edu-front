@@ -3,7 +3,7 @@ import MakeForm from '../../tools/makeform/MakeForm'
 import Section from '../../style/mui/styled/Section'
 import { useCreateUnitMutation } from '../../toolkit/apis/unitsApi'
 import usePostData from '../../hooks/usePostData'
-import TitleWithDividers from '../section_title/TitleWithDividers'
+import TitleWithDividers from '../ui/TitleWithDividers'
 
 function UnitCreate({ grade }) {
 

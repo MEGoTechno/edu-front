@@ -21,7 +21,6 @@ export default function useLazyGetData(getData) {
         return new Promise(async (resolve, reject) => {
             try {
                 const result = await getData(params, enableCache)
-                console.log('result ==>', result)
                 if (result.error) {
                     // error ===> invalid jwt
                     if (result.error?.data?.isKick === true) {

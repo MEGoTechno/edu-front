@@ -2,7 +2,7 @@ import { Avatar, Box, Typography } from '@mui/material'
 import React, { useCallback, useEffect, useState } from 'react'
 
 import Section from "../../style/mui/styled/Section"
-import SectionTitle from '../../components/section_title/SectionTitle'
+import TitleSection from '../../components/ui/TitleSection'
 import MeDatagrid from '../../tools/datagrid/MeDatagrid'
 import { useLazyGetUsersQuery } from '../../toolkit/apis/usersApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
@@ -126,7 +126,7 @@ function GetUsersPage() {
 
     return (
         <Section>
-            <SectionTitle title={lang.USERS_PAGE} />
+            <TitleSection title={lang.USERS_PAGE} />
             <FlexColumn sx={{ width: '100%' }}>
                 <FilledHoverBtn onClick={() => setOpen(true)} >create user</FilledHoverBtn>
             </FlexColumn>

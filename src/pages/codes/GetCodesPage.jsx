@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Section from '../../style/mui/styled/Section'
-import SectionTitle from '../../components/section_title/SectionTitle'
-import TitleWithDividers from '../../components/section_title/TitleWithDividers'
+import TitleSection from '../../components/ui/TitleSection'
+import TitleWithDividers from '../../components/ui/TitleWithDividers'
 import MeDatagrid from '../../tools/datagrid/MeDatagrid'
 
 import { useDeleteCodeMutation, useLazyGetCodesQuery, useUpdateCodeMutation } from '../../toolkit/apis/codesApi'

@@ -38,7 +38,9 @@ export default function CreateFormik({ inputs, onSubmit, status, btnWidth, enabl
                             <Box display={"flex"} justifyContent={"space-between"} flexWrap={"wrap"} width={'100%'} >
                                 {inputs && inputs.map((input, i) => {
                                     return (
-                                        <MakeInput key={i} input={input} props={props} />
+                                        <Box key={i} style={{ width: input.width || '100%', margin: '14px 0' }}>
+                                            <MakeInput input={input} props={props} />
+                                        </Box>
                                     )
                                 })}
                             </Box>
