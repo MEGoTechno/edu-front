@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
     reducerPath: "api", //from state
     baseQuery: fetchBaseQuery({
-        baseUrl: await import.meta.env.VITE_DB_URI + '/api',
+        baseUrl:"https://edu-server-two.vercel.app"  + '/api',
     }),
 
 
