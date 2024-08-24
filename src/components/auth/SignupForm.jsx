@@ -18,6 +18,8 @@ import usePostData from '../../hooks/usePostData';
 import { lang } from '../../settings/constants/arlang';
 // constants
 
+import * as Yup from "yup"
+// validation: Yup.string().required("مطلوب").min(6, "يجب ان يكون اكثر من 6")
 
 const gradeOptions = () => {
     let options = []
@@ -51,46 +53,63 @@ function SignupForm() {
             label: lang.NAME,
             width: { xs: '100%', md: '49%' },
             icon: <MdOutlineDriveFileRenameOutline color='green' />,
+            validation: Yup.string().required(lang.REQUERIED).min(6, "يجب ان يكون 3 كلمات")
+
         }, {
             name: 'email',
             label: lang.EMAIL,
             width: { xs: '100%', md: '49%' },
             type: 'email',
             icon: <MdMarkEmailRead color='green' />,
+            validation: Yup.string().required(lang.REQUERIED).email('يجب ادخال ايميل صالح')
         }, {
             name: 'phone',
             label: lang.PHONE,
             width: { xs: '100%', md: '49%' },
-            icon: <FaSquarePhoneFlip color='green' />
+            icon: <FaSquarePhoneFlip color='green' />,
+            validation: Yup.string().required(lang.REQUERIED).matches(/^[0-9]{11}$/, "يجب ان يكون 11 رقم")
+
         }, {
             name: 'familyPhone',
             label: lang.FAMILY_PHONE,
             width: { xs: '100%', md: '49%' },
-            icon: <PiPhoneDisconnectFill color='green' />
+            icon: <PiPhoneDisconnectFill color='green' />,
+            validation: Yup.string().required(lang.REQUERIED).matches(/^[0-9]{11}$/, "يجب ان يكون 11 رقم")
+
         }, {
             name: 'grade',
             label: lang.GRADE,
             type: 'select',
             options: gradeOptions(),
             icon: <IoSchool color='green' />,
+            validation: Yup.string().required(lang.REQUERIED)
+
         }, {
             name: 'government',
             label: lang.GOVERNMENT,
             type: 'select',
             options: governmentsOptions(),
-            icon: <RiGovernmentFill color='green' />
+            icon: <RiGovernmentFill color='green' />,
+            validation: Yup.string().required(lang.REQUERIED)
+
         }, {
             name: 'code',
             label: lang.CODE_optional,
-            icon: <CiBarcode color='green' />
+            icon: <CiBarcode color='green' />,
+            validation: Yup.string().required("مطلوب").matches(/^[0-9 -]{19}$/, 'Must be exactly 16 digits')
+
         }, {
             name: 'password',
             label: lang.PASSWORD,
-            icon: <TbPasswordUser color='green' />
+            icon: <TbPasswordUser color='green' />,
+            validation: Yup.string().required("مطلوب").min(6, "يجب ان يكون اكثر من 6")
+
         }, {
             name: 'confirmPassword',
             label: lang.CONFIRM_PASSWORD,
-            icon: <TbPasswordUser color='green' />
+            icon: <TbPasswordUser color='green' />,
+            validation: Yup.string().required("مطلوب").min(6, "يجب ان يكون اكثر من 6").oneOf([Yup.ref('password'), null], 'كلمة المرور غير متطابقه')
+
         },
     ]
 

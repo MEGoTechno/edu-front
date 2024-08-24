@@ -23,7 +23,7 @@ function SignupPage() {
             <FlexRow height={'100%'} justifyContent={'space-evenly'}>
 
                 {/* banner */}
-                <BannerAuth />
+                <BannerAuth img={'/assets/signup.png'} title={BUILD + ' ' + ACCOUNT}/>
 
                 {/* signup form */}
                 <Box sx={{

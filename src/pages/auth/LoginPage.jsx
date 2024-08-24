@@ -13,11 +13,11 @@ import BannerAuth from '../../components/ui/BannerAuth'
 import TextBorderAround from '../../components/ui/TextBorderAround'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { lang } from '../../settings/constants/arlang'
 
 
 
-const LOGIN = 'تسجيل'
-const ENTRY = "الدخول"
+
 
 
 
@@ -41,7 +41,7 @@ function LoginPage() {
       <FlexRow height={'100%'} justifyContent={'space-evenly'}>
 
         {/* banner */}
-        <BannerAuth />
+        <BannerAuth title={lang.LOGIN_ENTRY} img={'assets/login.png'} />
 
         {/* Login form */}
         <Box sx={{
@@ -53,8 +53,8 @@ function LoginPage() {
             <TextBorderAround>
 
               <ReactLoginIcon style={{ margin: '0 10px' }} size={'2rem'} />
-              <span style={{ color: theme.palette.neutral[0] }}> {LOGIN} </span>
-              <span style={{ marginRight: '10px' }}> {ENTRY}</span>
+              <span style={{ color: theme.palette.neutral[0] }}> {lang.LOGIN} </span>
+              <span style={{ marginRight: '10px' }}> {lang.ENTRY}</span>
               <div style={{
                 transform: 'rotate(180deg)'
               }}>

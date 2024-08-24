@@ -28,6 +28,12 @@ export const routes = [
                 path: '/user', children: userRoutes
             },
             {
+                path: 'courses/:courseId', element: <CoursePage />
+            },
+            {
+                path: 'courses/:courseId/lectures/:lectureId', element: <LecturePage />
+            },
+            {
                 path: '/grades', children: gradesRoutes,
             }, {
                 path: '/management/users', children: manageUserRoutes,

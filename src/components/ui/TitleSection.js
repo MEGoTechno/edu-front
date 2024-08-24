@@ -24,7 +24,7 @@ function TitleSection({ title, icon }) {
                         {icon}
                     </span>
                     <Typography variant='h4' component={'h2'} sx={{ textIndent: '10px', textShadow: '-9px 9px 0 hsla(0, 0%, 0%, 0.1)' }} >
-                        {title.toUpperCase()}
+                        {title}
                     </Typography>
                 </FlexRow>
 

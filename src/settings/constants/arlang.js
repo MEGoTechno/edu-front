@@ -2,6 +2,10 @@ export const lang = {
     LOGOUT: 'تسجيل الخروج',
     GRADES: "السنوات الدراسيه",
     COURSES: 'الكورسات',
+    LOGIN_ENTRY: 'تسجيل الدخول',
+    LOGIN : 'تسجيل',
+    ENTRY : "الدخول",
+
     //user 
     WALLET: 'المحفظه',
     NAME: 'الاسم ثلاثى',
@@ -13,7 +17,7 @@ export const lang = {
     GOVERNMENT: 'المحافظه',
     PASSWORD: 'كلمة السر',
     CONFIRM_PASSWORD: 'اعد كتابه كلمة السر',
-
+    YOUR_SUBSCRIPTIONS: 'اشتراكاتك',
     // login
     USERNAME: "اسم المستخدم",
     CODE: 'كود',
@@ -59,4 +63,10 @@ export const lang = {
     NO_LECTURES_IN_THIS_COURSE: 'لا توجد محاضرات في هذا الكورس',
     VIDEO: 'فيديو',
     THUMBNAIL: 'صوره',
+
+    //errors
+    REQUERIED: 'مطلوب',
+    ARE_YOU_SURE: "هل انت متاكد...؟",
+    AGREE: 'موافق',
+    DISAGREE: 'غير موافق'
 }

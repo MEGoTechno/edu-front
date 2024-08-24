@@ -1,20 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Section from '../../style/mui/styled/Section'
 import UserHeader from '../../components/ui/UserHeader'
 import { useSelector } from 'react-redux'
-import { Divider, Typography } from '@mui/material'
+import { Alert, Divider, Typography } from '@mui/material'
+import { useLazyGetUserCoursesQuery } from '../../toolkit/apis/userCoursesApi'
+import useLazyGetData from '../../hooks/useLazyGetData'
+import TitleSection from '../../components/ui/TitleSection'
+import UserCourseDetails from '../../components/courses/UserCourseDetails'
+import AccordionStyled from '../../style/mui/styled/AccordionStyled'
+import Grid from '../../style/vanilla/Grid'
+import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
+import Separator from '../../components/ui/Separator'
+import { lang } from '../../settings/constants/arlang'
 
 function UserHome() {
 
     const { user } = useSelector(s => s.global)
+
+    const [courses, setCourses] = useState(null)
+    const [open, setOpen] = useState(false)
+
+
+    const [getData, status] = useLazyGetUserCoursesQuery()
+    const [getUserCourses] = useLazyGetData(getData)
+
+    useEffect(() => {
+        const trigger = async () => {
+            const res = await getUserCourses()
+            setCourses(res)
+        }
+
+        if (!courses && open) {
+            trigger()
+        }
+    }, [open])
 
     return (
         <Section sx={{ minHeight: '86vh' }}>
             <Typography variant='subBanner' >
                 مرحبًا :  {user.name}
             </Typography>
-            <Divider sx={{ border: '4px solid', borderColor: "primary.main", my: '8px' }} />
-            <UserHeader user={user} flexDirection={'row'} variant={'square'} />
+            <Separator />
+            <UserHeader user={user} flexDirection={'row'} variant={'circle'} />
+            <TitleSection title={lang.YOUR_SUBSCRIPTIONS} />
+
+            <AccordionStyled title={lang.COURSES} bgcolor="background.alt" expanded={open} setExpanded={setOpen}>
+                {status.isLoading && (
+                    <LoaderWithText />
+                )}
+                {courses?.length === 0 && (
+                    <Alert variant='filled' severity='warning'> انت لم تشترك فى اى كورس بعد...!</Alert>
+                )}
+                <Grid>
+                    {courses && courses?.map(({ course, createdAt }, i) => <UserCourseDetails key={i} course={course} subscribedAt={createdAt} />)}
+                    {/* you have to destruct here ! */}
+                </Grid>
+            </AccordionStyled>
+
         </Section>
     )
 }

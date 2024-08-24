@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { useTheme } from '@mui/material';
 import { ErrorBtn, FilledHoverBtn } from '../btns/buttonsStyles';
+import { lang } from '../../../settings/constants/arlang';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -21,7 +22,7 @@ export default function ModalStyled({ open, setOpen, title, desc, children, acti
         setOpen(false);
     };
 
-    const onAction = async()=> {
+    const onAction = async () => {
         setOpen(false)
         await action()
     }
@@ -40,7 +41,7 @@ export default function ModalStyled({ open, setOpen, title, desc, children, acti
                 }}
             >
                 {children ? children : (<>
-                    <DialogTitle>{title || 'Are you sure ?'}</DialogTitle>
+                    <DialogTitle>{title || lang.ARE_YOU_SURE}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
                             {desc}
@@ -51,12 +52,12 @@ export default function ModalStyled({ open, setOpen, title, desc, children, acti
                     <ErrorBtn sx={{
                         minWidth: '100px',
                         borderRadius: '16px'
-                    }} onClick={handleClose}>Disagree</ErrorBtn>
+                    }} onClick={handleClose}>{lang.DISAGREE}</ErrorBtn>
                     {!children && (
 
                         <FilledHoverBtn sx={{
                             minWidth: '100px'
-                        }} onClick={onAction}>Agree</FilledHoverBtn>
+                        }} onClick={onAction}>{lang.AGREE}</FilledHoverBtn>
                     )}
                 </DialogActions>
             </Dialog>

@@ -8,7 +8,17 @@ const userCoursesApi = apiSlice.injectEndpoints({
                 const params = queries
 
                 return {
-                    url: "/user_courses/",
+                    url: "/user_courses/courses",
+                    params
+                }
+            }
+        }),
+        getOneUserCourse: builder.query({
+            query: (queries) => {
+                const params = queries
+
+                return {
+                    url: "/user_courses/courses/" + params.course,
                     params
                 }
             }
@@ -32,5 +42,5 @@ const userCoursesApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetUserCoursesQuery, useGetAllUsersCoursesQuery, useSubscribeMutation
+export const { useLazyGetUserCoursesQuery, useGetUserCoursesQuery, useGetOneUserCourseQuery, useGetAllUsersCoursesQuery, useSubscribeMutation
 } = userCoursesApi

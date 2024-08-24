@@ -22,15 +22,17 @@ import { dateOptions, getFullDate } from '../../settings/constants/dateConstants
 import { useLazyGetLecturesCountQuery } from '../../toolkit/apis/statisticsApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
 import { FilledHoverBtn, OutLinedHoverBtn } from '../../style/mui/btns/buttonsStyles'
+import { useSelector } from 'react-redux'
 
-function UserCourseDetails({ course }) {
-
+function UserCourseDetails({ course, subscribedAt }) {
     const navigate = useNavigate()
+    // const { user } = useSelector(s => s.global)
 
     const goCourse = (e) => {
         e.preventDefault()
         navigate("courses/" + course.index, { state: course })
     }
+
     const [getData] = useLazyGetLecturesCountQuery()
     const [getLecturesCount] = useLazyGetData(getData)
 
@@ -47,6 +49,7 @@ function UserCourseDetails({ course }) {
         }
     }, [course])
 
+
     if (!course) return <>loading ...!</>
 
     return (
@@ -61,8 +64,8 @@ function UserCourseDetails({ course }) {
             </FlexRow>
 
         </Button>}
-            btn2={<OutLinedHoverBtn sx={{ width: '100%' }} endIcon={<MdOutlinePayment />} >subsrcibe</OutLinedHoverBtn>}
-            btn1={<FilledHoverBtn sx={{ width: '100%' }} endIcon={<FaArrowRight />}>go to course</FilledHoverBtn>
+            // btn2={!subscribedAt && (<OutLinedHoverBtn sx={{ width: '100%' }} endIcon={<MdOutlinePayment />} >subsrcibe</OutLinedHoverBtn>)}
+            btn1={<FilledHoverBtn FilledHoverBtn sx={{ width: '100%' }} component={Link} to={"courses/" + course.index} onClick={goCourse} endIcon={< FaArrowRight />} > go to course</FilledHoverBtn >
             }>
 
             <FlexColumn>
@@ -72,14 +75,25 @@ function UserCourseDetails({ course }) {
                     <TabInfo count={'10'} i={'3'} title={'files'} icon={<FilesIcon size={'1.5rem'} />} />
                     <TabInfo count={'10'} i={'3'} title={'Exams'} icon={<ExamIcon size='1.5rem' />} />
                     <TabInfo count={getFullDate(course.createdAt)} i={'1'} title={'تاريخ انشاء الكورس'} icon={<MdDateRange size='1rem' />} isBold={false} />
+                    {subscribedAt && (
+                        <TabInfo count={getFullDate(subscribedAt)} i={'2'} title={'تاريخ الاشتراك بالكورس'} icon={<MdDateRange size='1rem' />} isBold={false} />
+                    )}
                 </FlexBetween>
-                <Box mt={'20px'}>
+                {!subscribedAt && (
+                    <Box mt={'20px'}>
 
-                    <RowInfo title={'سعر الكورس'} desc={<Typography variant='subtitle2' >120 جنيها</Typography>} icon={<AiFillPoundCircle size='1rem' />} bgcolor='primary.500' />
-                    {course.discount && course.discount}
-                </Box>
+                        <RowInfo title={'سعر الكورس'} desc={<Typography variant='subtitle2' >{course.price} جنيها</Typography>} icon={<AiFillPoundCircle size='1rem' />} bgcolor='primary.500' />
+                        {course.discount && (
+                            <>
+                                <Separator sx={{ width: '100px', borderWidth: '2px', mr: 'auto' }} />
+                                <TabInfo title={'discount'} count={course.discount + ' $'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                            </>
+                        )}
+                    </Box>
+                )}
+
             </FlexColumn>
-        </CardStyled>
+        </CardStyled >
     )
 }
 

@@ -1,6 +1,8 @@
 import { FaHome } from "react-icons/fa";
 import { LoginIcon, SignupIcon } from "../components/header/Icons";
 import { user_roles } from "./constants/roles";
+import { store } from "../toolkit/store";
+
 
 export const sidebarLinks = [
     {
@@ -11,7 +13,7 @@ export const sidebarLinks = [
     }, {
         name: "الكورسات", icon: <SignupIcon size="22px" />, to: "/grades", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "محاضراتى", icon: <SignupIcon size="22px" />, to: "/courses", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
+        name: "محاضراتى", icon: <SignupIcon size="22px" />, to: "/grades/" + store?.getState()?.global?.user?.grade, allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
         name: "اداره الحساب", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {

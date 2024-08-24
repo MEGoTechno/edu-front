@@ -10,7 +10,7 @@ import { Link } from '@mui/material'
 import Loader from '../../style/mui/loaders/Loader'
 import ModalStyled from '../../style/mui/styled/ModalStyled'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetUserCoursesQuery, useSubscribeMutation } from '../../toolkit/apis/userCoursesApi'
+import { useSubscribeMutation, useGetOneUserCourseQuery } from '../../toolkit/apis/userCoursesApi'
 import usePostData from '../../hooks/usePostData'
 import { setUser } from '../../toolkit/globalSlice'
 import { getFullDate } from '../../settings/constants/dateConstants'
@@ -21,9 +21,13 @@ function CourseSubscribeCard({ course }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(s => s.global)
-    const { data } = useGetUserCoursesQuery({ course: course._id })
 
-    const [userCourse, setUserCourse] = useState(data?.values[0])
+    const { data } = useGetOneUserCourseQuery({ course: course._id })
+
+
+    const [isSubscribed, setSubscribed] = useState(false)
+    const [userCourse, setUserCourse] = useState(null)
+
     const [open, setOpen] = useState(false)
     const [sendData, status] = useSubscribeMutation()
     const [subscribeFc] = usePostData(sendData)
@@ -38,14 +42,15 @@ function CourseSubscribeCard({ course }) {
     }
 
     useEffect(() => {
-        if (data?.values[0]) {
-            setUserCourse(data?.values[0])
+        if (data?.values) {
+            setSubscribed(true)
+            setUserCourse(data.values)
         }
     }, [data])
 
     return (
         <CardCourse img={'/assets/3rd.jpg'} title={course.name} borderColor="transparent">
-            {userCourse?.course === course._id ? getFullDate(userCourse.createdAt) :
+            {isSubscribed ? getFullDate(userCourse.createdAt) :
                 <>
                     <RowInfo title={'سعر الكورس'} desc={`${course.price} جنيها`} icon={<AiFillPoundCircle size={'1.25rem'} />} />
                     {course.discount && (
@@ -55,7 +60,7 @@ function CourseSubscribeCard({ course }) {
                         </>
                     )}
 
-                    {userCourse?.course === course._id ? 'You are Subscribed ...' :
+                    {isSubscribed ? 'You are Subscribed ...' :
                         <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} onClick={() => setOpen(true)} disabled={status.isLoading} > {status.isLoading ? <Loader color={'orange'} /> : "subscribe now"} </FilledHoverBtn>
                     }
 
