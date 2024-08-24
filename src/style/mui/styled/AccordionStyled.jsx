@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 
 export default function AccordionStyled({ title, children, color = 'primary.main', bgcolor = 'background.default', expanded = false, setExpanded }) {
 
@@ -33,7 +34,9 @@ export default function AccordionStyled({ title, children, color = 'primary.main
                     borderRadius: '16px',
                 }}
             >
-                {title}
+                <Typography variant='h5'>
+                    {title}
+                </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{
                 bgcolor: bgcolor,
