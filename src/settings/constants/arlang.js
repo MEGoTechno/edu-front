@@ -1,6 +1,7 @@
 export const lang = {
     LOGOUT: 'تسجيل الخروج',
-    
+    GRADES: "السنوات الدراسيه",
+    COURSES: 'الكورسات',
     //user 
     WALLET: 'المحفظه',
     NAME: 'الاسم ثلاثى',

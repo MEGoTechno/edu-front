@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import UserHome from './UserHome'
 import { FlexColumn } from '../../style/mui/styled/Flexbox'
 import { LogosYoutubeIcon } from '../../components/ui/svg/Social'
+import { lang } from '../../settings/constants/arlang'
 
 const BoxFm = motion(Box)
 const paddingX = {
@@ -76,7 +77,7 @@ function HomePage({ px }) {
 
       {/*  grades */}
       <Section>
-        <TitleSection title={'grades'} />
+        <TitleSection title={lang.GRADES} />
       </Section>
 
       <Section>

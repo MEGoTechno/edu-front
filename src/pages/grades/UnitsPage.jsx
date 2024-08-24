@@ -47,7 +47,6 @@ function UnitsPage() {
     trigger()
   }, [])
 
-  console.log('object us', units)
   return (
     <Section>
 
