@@ -1,7 +1,16 @@
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material'
 import React from 'react'
 import { FlexRow } from '../../style/mui/styled/Flexbox'
 import { StyledBtn } from '../../style/mui/btns/buttonsStyles'
+
+import { FaFacebook } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaTelegram } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { LogosFacebook, LogosTelegram, LogosYoutubeIcon, SkillIconsInstagram } from '../ui/svg/Social';
+import { Link } from 'react-router-dom';
 
 const LOGO_DR = 'أ/'
 const LOGO_FIRST_NAME = 'محمود'
@@ -9,6 +18,7 @@ const LOGO_SECOND_NAME = 'العوضى'
 
 
 function HeroContent() {
+    const theme = useTheme()
     return (
         <>
             <Typography variant='banner' noWrap mb="30px">
@@ -27,16 +37,18 @@ function HeroContent() {
             <Typography variant='subBanner' noWrap={false} my={'14px'}  >خيارك الافضل لتعلم <span style={{ color: 'red' }}>الاحياء</span> <span style={{ color: 'orange' }}>للمرحله الثانويه</span> </Typography>
 
             <FlexRow sx={{ my: '16px' }}>
-                <StyledBtn sx={{ m: '0 5px', fontSize: { md: '1.7rem', xs: '1rem' }, minWidth: '250px' }}>عرض الكورسات</StyledBtn>
+                <StyledBtn sx={{ m: '0 5px', fontSize: { md: '1.7rem', xs: '1rem' }, minWidth: '250px' }} component={Link} to="/grades">عرض الكورسات</StyledBtn>
             </FlexRow>
+
             <FlexRow gap={'10px'}>
-                <Box sx={{ width: '40px', height: '40px', bgcolor: '#ddd', borderRadius: '16px' }}></Box>
-                <Box sx={{ width: '40px', height: '40px', bgcolor: '#ddd', borderRadius: '16px' }}></Box>
-                <Box sx={{ width: '40px', height: '40px', bgcolor: '#ddd', borderRadius: '16px' }}></Box>
-                <Box sx={{ width: '40px', height: '40px', bgcolor: '#ddd', borderRadius: '16px' }}></Box>
+                <IconButton color='neutral.0'><LogosFacebook /></IconButton>
+                <IconButton><SkillIconsInstagram size="1.5rem" /></IconButton>
+                <IconButton><FaXTwitter size={'1.5rem'} color={theme.palette.neutral[0]} /></IconButton>
+                <IconButton><LogosTelegram /></IconButton>
+                <IconButton><LogosYoutubeIcon /></IconButton>
             </FlexRow>
         </>
     )
 }
-
+//color='#E1306C'
 export default HeroContent

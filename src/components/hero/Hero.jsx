@@ -94,18 +94,26 @@ function Hero() {
             ) : (
 
                 <>
-                    <FlexColumnFm sx={{
+                    <Box sx={{
+                        position: 'absolute', top: '60px',  minWidth: '250px', minHeight: '250px', opacity: '.4', transform: 'translateX(105%)',
+                        borderRadius: '50%', zIndex: -2,
+                    }}>
+                        <DnaAnimation circleColor={theme.palette.primary.main} borderColor={'orange'} />
+
+                    </Box>
+
+                    <FlexColumn sx={{
                         maxWidth: '450px', m: 'auto'
                     }}>
                         <HeroContent />
-                    </FlexColumnFm>
+                    </FlexColumn>
 
-                    <BoxFm sx={{
+                    <Box sx={{
                         minWidth: '240px', maxWidth: { xs: '300px', md: '400px', lg: '500px' },
                         m: '0 auto', pointerEvents: 'none',
                     }}>
                         <Banner />
-                    </BoxFm>
+                    </Box>
                 </>
             )}
 
@@ -124,21 +132,7 @@ function Hero() {
                     width: '70px', height: '70px'
                 }} />
             </BoxFm>
-            {/* 
-            <Box sx={{
-                position: 'absolute', top: '0'
-            }}>
-                <div className='bubbles'></div>
-            </Box> */}
-            {/* <FaVirusCovid color='orange' style={{
-                position: 'absolute', right: '0', bottom: '0', width: '70px', height: '70px'
-            }} />
-
-            <FaVirusCovid color='orange' style={{
-                position: 'absolute', left: '0', top: '0', width: '70px', height: '70px'
-            }} /> */}
-
-
+            
             {/* <Ballons /> */}
         </Box>
     )

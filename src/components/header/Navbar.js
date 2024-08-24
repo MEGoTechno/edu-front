@@ -1,6 +1,6 @@
-import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography, useTheme } from '@mui/material'
+import { alpha, AppBar, Avatar, Badge, Box, Button, IconButton, Toolbar, Tooltip, Typography, useTheme } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +21,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import RowInfo from '../ui/RowInfo';
+import { user_roles } from '../../settings/constants/roles';
+
+import { GiWallet } from "react-icons/gi";
+
+import { FaWallet } from "react-icons/fa";
+import TabInfo from '../ui/TabInfo';
+import InfoInCircle from '../ui/InfoInCircle';
+import { lang } from '../../settings/constants/arlang';
 
 
 function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
@@ -38,6 +46,22 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
     }
 
     const user = useSelector(s => s.global.user)
+    // const [isScroll, setScrolled] = useState(false)
+
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         if (window.scrollY > 20) {
+    //             setScrolled(true);
+    //         } else {
+    //             setScrolled(false);
+    //         }
+    //     };
+
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, [])
+
+
     return (
         <AppBar sx={{
             position: 'sticky', top: 0,
@@ -46,25 +70,25 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
             paddingY: '6px',
             boxShadow: 'none',
             backgroundImage: 'none',
-            backdropFilter: !isOpenedSidebar ? 'blur(5px)' : 'none',
-            pr: { md: '40px' }
-            // backgroundColor: 'rgba(255 255 255 / .8)'
+            backdropFilter: !isOpenedSidebar ? 'blur(10px)' : 'none',
+            pr: { md: '40px' },
+            backgroundColor: isOpenedSidebar ? 'transparent' : alpha(theme.palette.background.default, .6)
         }}>
             <Toolbar>
-                <Box zIndex={1800} >
+                <Box zIndex={1800} sx={{ rotate: '180deg', mr: 1 }} >
                     <MeToggler isOpenedSidebar={isOpenedSidebar} openSidebar={openSidebar} />
                 </Box>
 
                 <FlexRow flexGrow={1}>
                     <Button component={Link} to={'/'}>
-                        <Avatar sx={{ bgcolor: "primary.main", mr: 1 }}>N</Avatar>
+                        <Avatar sx={{ bgcolor: "primary.main", mr: 1, color: 'grey.0' }}>M</Avatar>
                         <Typography variant="h6" component="div" >
                             LOGO
                         </Typography>
                     </Button>
                 </FlexRow>
 
-                <FlexRow color={theme.palette.neutral[0]} gap={2} >
+                <FlexRow color={theme.palette.neutral[0]} gap={.5} >
                     <ModeToggler toggleMode={toggleMode} />
 
                     {(!isMobileScreen && !user?.role) && (
@@ -87,23 +111,26 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
 
                     {user?.role && (
                         <>
-                            <RowInfo title={'wallet'} desc={user.wallet || 0} />
-                            <Box>
+                            {user.role === user_roles.ONLINE && (
+                                <Tooltip title={lang.WALLET} placement="top">
+                                    <IconButton size='large'>
+                                        <Badge badgeContent={user.wallet || 0} color='warning' max={5000}>
+                                            <GiWallet size={'1.5rem'} />
+                                        </Badge>
+                                    </IconButton>
+                                </Tooltip>
+                            )}
+                            <IconButton >
+                                <NotificationsIcon sx={{
+                                    color: 'primary.main'
+                                }} />
+                            </IconButton>
 
-                                <IconButton sx={{
-                                    mx: '6px'
-                                }}>
-                                    <NotificationsIcon sx={{
-                                        color: 'primary.main'
-                                    }} />
-                                </IconButton>
-
-                                <IconButton>
-                                    <AccountCircle sx={{
-                                        color: 'primary.main'
-                                    }} />
-                                </IconButton>
-                            </Box>
+                            <IconButton>
+                                <AccountCircle sx={{
+                                    color: 'primary.main'
+                                }} />
+                            </IconButton>
                         </>
                     )}
 

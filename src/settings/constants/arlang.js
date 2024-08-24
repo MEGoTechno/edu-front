@@ -1,5 +1,8 @@
 export const lang = {
+    LOGOUT: 'تسجيل الخروج',
+    
     //user 
+    WALLET: 'المحفظه',
     NAME: 'الاسم ثلاثى',
     EMAIL: 'البريد الالكترونى',
     PHONE: 'رقم الهاتف',

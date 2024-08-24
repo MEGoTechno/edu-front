@@ -67,7 +67,7 @@ function MeToggler({ openSidebar, isOpenedSidebar }) {
       edge="start"
       color="inherit"
       aria-label="menu"
-      sx={{ mr: 2, }} // border: `2px solid ${theme.palette.primary.main} `,
+      // border: `2px solid ${theme.palette.primary.main} `,
       onClick={openSidebar}
     >
       <Box sx={logoStyled}>

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { ErrorBtn } from '../../style/mui/btns/buttonsStyles';
 import ModalStyled from '../../style/mui/styled/ModalStyled';
 import { setUser } from '../../toolkit/globalSlice';
+import { lang } from '../../settings/constants/arlang';
 
 
 export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, sideBarWidth }) {
@@ -41,8 +42,9 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
                 sx={{
                     width: sideBarWidth || '250px',
                     zIndex: 50,
-                    // ml: -500,
+                    backgroundImage: 'none',
                     "& .MuiDrawer-paper": {
+                        backgroundImage: 'none',
                         color: theme.palette.text.primary,
                         backgroundColor: theme.palette.background.default,
                         borderWidth: "2px",
@@ -61,7 +63,7 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
                     <ErrorBtn sx={{ mx: "10px", width: '100%' }} onClick={(() => {
                         setModal(true)
                     })} >
-                        logout
+                        {lang.LOGOUT}
                     </ErrorBtn>
                 </Box>}
             </Drawer >
