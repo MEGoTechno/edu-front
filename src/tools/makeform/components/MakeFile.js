@@ -3,11 +3,12 @@ import React, { useRef } from 'react'
 // import { buttonStyle } from '../../../../styles/buttonsStyles'
 import ShowFileSettings from './ShowFileSettings'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { hasError } from '../constants/hasError';
 
 function MakeFile({ inputName, input, props, value }) {
     const fileRef = useRef(null)
 
-    const removeFile = ()=> {
+    const removeFile = () => {
         props.setFieldValue(inputName, '')
     }
     return (
@@ -23,19 +24,19 @@ function MakeFile({ inputName, input, props, value }) {
                     props.setFieldValue(inputName, e.target.files[0])
                 }}
             />
-            <Button 
-            // sx={buttonStyle} 
-            disabled={input.disabled ||false}
-            style={{ width: "auto" }} onClick={() => fileRef.current.click()}>{input.label} <AddCircleOutlineIcon /> </Button>
+            <Button
+                // sx={buttonStyle} 
+                disabled={input.disabled || false}
+                style={{ width: "auto" }} onClick={() => fileRef.current.click()}>{input.label} <AddCircleOutlineIcon /> </Button>
 
-            {props.errors[inputName] && props.touched[inputName] && (
-                <Alert sx={{ mb: "5px" }} severity='error'>{props.errors[inputName]}</Alert>
-            )}
 
             {value && (
                 <ShowFileSettings file={value} removeFile={removeFile} />
             )}
 
+            {hasError(props, inputName) && (
+                <Alert sx={{ my: "5px" }} severity='error'>{props.errors[inputName]}</Alert>
+            )}
         </Box>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AccordionStyled from '../../style/mui/styled/AccordionStyled'
-import { Box, Button, Typography } from '@mui/material'
+import { Alert, Box, Button, Typography } from '@mui/material'
 import { RtArrow } from '../header/Icons'
 import { CoursesIcon } from '../ui/svg/ContentSvgs'
 import { Link } from 'react-router-dom'
@@ -10,6 +10,7 @@ import { useLazyGetCoursesQuery } from '../../toolkit/apis/coursesApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
 import UserCourseDetails from '../courses/UserCourseDetails'
 import Grid from '../../style/vanilla/Grid'
+import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
 
 function UnitCourses({ unit }) {
 
@@ -35,6 +36,12 @@ function UnitCourses({ unit }) {
 
     return (
         <AccordionStyled title={unit.name} bgcolor="background.alt" expanded={open} setExpanded={setOpen}>
+            {status.isLoading && (
+                <LoaderWithText />
+            )}
+            {courses?.length === 0 && (
+                <Alert variant='filled' severity='warning'> الكورسات هتنزل قريبا, خليك متابع.</Alert>
+            )}
             <Grid>
                 {courses.map((course, i) => <UserCourseDetails key={i} course={course} />)}
             </Grid>

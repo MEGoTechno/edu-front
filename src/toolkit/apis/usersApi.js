@@ -5,14 +5,6 @@ const usersApi = apiSlice.injectEndpoints({
         getUsers: builder.query({
             query: (queries) => {
                 const params = queries
-                // const { page, limit, grade, group, userName, name, email, phone, familyPhone, isActive, role } = queries
-                // let params = {}
-
-                // if (filter) params = { ...filter }
-                // if (sort) params = { ...sort }
-
-                // page ? params.page = page : params.page = 1
-                // limit ? params.limit = limit : params.limit = 5
                 return {
                     url: "/users",
                     params
@@ -32,14 +24,14 @@ const usersApi = apiSlice.injectEndpoints({
         updateUser: builder.mutation({
             query: (data) => ({
                 url: `/users`,
-                method: 'PATCH',
+                method: 'PUT',
                 body: data
             })
         }),
         updateUserProfile: builder.mutation({
             query: (data) => ({
-                url: `/users`,
-                method: 'PUT',
+                url: `/users/` + data.get("id"),
+                method: 'PATCH',
                 body: data
             })
         }),

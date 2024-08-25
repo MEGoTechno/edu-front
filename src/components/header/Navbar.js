@@ -126,7 +126,7 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
                                 }} />
                             </IconButton>
 
-                            <IconButton>
+                            <IconButton component={Link} to="/user/profile">
                                 <AccountCircle sx={{
                                     color: 'primary.main'
                                 }} />

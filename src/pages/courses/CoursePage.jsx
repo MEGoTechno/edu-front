@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HeaderContent from '../../components/ui/HeaderContent'
 import Section from '../../style/mui/styled/Section'
 import { ExamIcon, ExamIconOutlined, FilesIcon, FilesIcon2, FilesIconWithLamp, VidsIcon2 } from '../../components/ui/svg/ContentSvgs'
-import { Box, Link } from '@mui/material'
+import { Alert, Box, Link } from '@mui/material'
 import CardCourse from '../../components/ui/CardCourse'
 import RowInfo from '../../components/ui/RowInfo'
 import { FilledHoverBtn } from '../../style/mui/btns/buttonsStyles'
@@ -20,6 +20,8 @@ import { FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
 import { useLazyGetLecturesQuery } from '../../toolkit/apis/lecturesApi'
 import Loader from '../../style/mui/loaders/Loader'
 import CourseSubscribeCard from '../../components/courses/CourseSubscribeCard'
+import LoaderSkeleton from '../../style/mui/loaders/LoaderSkeleton'
+import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
 
 function CoursePage() {
 
@@ -69,7 +71,7 @@ function CoursePage() {
 
 
   const [lectures, setLectures] = useState([])
-  const [getLecturesFc] = useLazyGetLecturesQuery()
+  const [getLecturesFc, status] = useLazyGetLecturesQuery()
   const [getLectures] = useLazyGetData(getLecturesFc)
 
   useEffect(() => {
@@ -86,7 +88,7 @@ function CoursePage() {
   //is Subscribed
 
 
-  if (!course) return <>loading ...</>
+  if (!course) return <LoaderSkeleton />
 
   return (
     <Section>
@@ -110,9 +112,13 @@ function CoursePage() {
 
       <Box >
         <AccordionStyled title={'lectures'} setExpanded={setExpand} expanded={expand}>
+          {status.isLoading && (
+            <LoaderWithText />
+          )}
+
           <Grid>
 
-            {lectures.length === 0 ? "no" : lectures.map((lecture, i) => {
+            {lectures?.length === 0 ? <Alert variant='filled' severity='warning'>عذرًا، سيتم إضافة المحاضرات قريبا...!</Alert> : lectures.map((lecture, i) => {
               return <CardHover key={i} img={lecture?.thumbnail?.url || '/assets/3rd.jpg'} title={lecture?.name} desc={<span dangerouslySetInnerHTML={{ __html: lecture.description }} />} to={'lectures/' + lecture._id} >
                 <FlexColumn>
                   <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />

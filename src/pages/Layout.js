@@ -16,8 +16,8 @@ function Layout() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-
     }, [location])
+    
     return (
         <Box>
             <Navbar isOpenedSidebar={isOpenedSidebar} setSidebar={setSidebar} isMobileScreen={isMobileScreen} />

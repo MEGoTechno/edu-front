@@ -50,7 +50,7 @@ function CourseSubscribeCard({ course }) {
 
     return (
         <CardCourse img={'/assets/3rd.jpg'} title={course.name} borderColor="transparent">
-            {isSubscribed ? getFullDate(userCourse.createdAt) :
+            {isSubscribed ? <TabInfo count={getFullDate(userCourse.createdAt)} i={1} title={'اشتركت فى'} /> :
                 <>
                     <RowInfo title={'سعر الكورس'} desc={`${course.price} جنيها`} icon={<AiFillPoundCircle size={'1.25rem'} />} />
                     {course.discount && (
@@ -60,9 +60,7 @@ function CourseSubscribeCard({ course }) {
                         </>
                     )}
 
-                    {isSubscribed ? 'You are Subscribed ...' :
-                        <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} onClick={() => setOpen(true)} disabled={status.isLoading} > {status.isLoading ? <Loader color={'orange'} /> : "subscribe now"} </FilledHoverBtn>
-                    }
+                    <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} onClick={() => setOpen(true)} disabled={status.isLoading} > {status.isLoading ? <Loader color={'orange'} /> : "subscribe now"} </FilledHoverBtn>
 
                     <Link href="#" underline="hover" mr={'auto'}>
                         سياسه شراء الكورسات
