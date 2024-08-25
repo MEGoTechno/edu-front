@@ -24,6 +24,8 @@ import { lang } from '../../settings/constants/arlang'
 import ModalStyled from '../../style/mui/styled/ModalStyled'
 import UnitCreate from '../../components/courses/UnitCreate'
 import CourseCreate from '../../components/courses/CourseCreate'
+import ManageUnits from './ManageUnits'
+import ManageCourses from './ManageCourses'
 
 
 // const UnitCreate = lazy(() => import('../../components/courses/UnitCreate'))
@@ -31,12 +33,10 @@ import CourseCreate from '../../components/courses/CourseCreate'
 function ManageCoursesPage() {
 
     //modals params
-    const [openUnitModal, setUnitModal] = useState(false)
-    const [openCourseModal, setCourseModal] = useState(false)
 
     const [grade, setGrade] = useState(null)
-    const [unit, setUnit] = useState(null) // unit_id
-    const [course, setCourse] = useState(null)
+    const [activeUnit, setActiveUnit] = useState(null) // unit_id
+    const [activeCourse, setActiveCourse] = useState(null)
     const [counts, setCounts] = useState({})
 
     //lectures numbers in every grade
@@ -59,26 +59,20 @@ function ManageCoursesPage() {
         <Section>
             <Paper sx={{ p: '40px' }}>
 
+                <GradesTabs setGrade={setGrade} counts={counts} />
                 <FlexColumn>
                     {/* <BannerIcon title="manage Courses" icon="icon " /> */}
 
-                    <GradesTabs setGrade={setGrade} counts={counts} />
+                    <ManageUnits grade={grade} activeUnit={activeUnit} setActiveUnit={setActiveUnit} />
 
-                    <FlexBetween gap={'10px'} m={'20px 0'}>
-                        <StyledBtn onClick={() => setUnitModal(true)} disabled={!grade}> {lang.CREATE_UNIT} </StyledBtn>
-                        <SelectUnit grade={grade} value={unit} setValue={setUnit} reset={[grade]} />
-                    </FlexBetween>
 
-                    {(unit) && (
-                        <FlexBetween gap={'10px'} m={'20px 0'} >
-                            <StyledBtn disabled={!unit} onClick={() => setCourseModal(true)}> {lang.CREATE_COURSE}</StyledBtn>
-                            <SelectCourse unit={unit} setValue={setCourse} value={course} reset={[unit]} />
-                        </FlexBetween>
+                    {(activeUnit) && (
+                        <ManageCourses grade={grade} activeUnit={activeUnit} activeCourse={activeCourse} setActiveCourse={setActiveCourse} />
                     )}
 
-                    {course && (
+                    {activeCourse && (
                         <Box sx={{ width: '100%' }}>
-                            <AdminCourseDetails courseId={course} />
+                            <AdminCourseDetails courseId={activeCourse} />
                         </Box>
                     )}
 
@@ -86,26 +80,14 @@ function ManageCoursesPage() {
                     <Separator sx={{ width: '100%' }} />
 
 
-                    {course && (
+                    {activeCourse && (
                         <Box sx={{ width: '100%' }}>
-                            <AdminLectures course={course} unit={unit} grade={grade} />
+                            <AdminLectures course={activeCourse} unit={activeUnit} grade={grade} />
                         </Box>
                     )}
 
                 </FlexColumn>
             </Paper>
-
-            <ModalStyled open={openUnitModal} setOpen={setUnitModal} >
-                {grade &&
-                    <UnitCreate grade={grade} />
-                }
-            </ModalStyled>
-
-            <ModalStyled open={openCourseModal} setOpen={setCourseModal} >
-                {(unit && grade) &&
-                    <CourseCreate unit={unit} grade={grade} setCourse={setCourse} />
-                }
-            </ModalStyled>
         </Section>
     )
 }

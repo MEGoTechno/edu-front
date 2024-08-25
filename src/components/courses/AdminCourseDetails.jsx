@@ -48,7 +48,7 @@ function AdminCourseDetails({ courseId }) {
                         <OutLinedHoverBtn sx={{ my: '12px' }} colorm='orange' endIcon={<FcStatistics />}>{lang.STATISTICS}</OutLinedHoverBtn>
                         <TabInfo count={'2000'} title={lang.SUBSCRIBERS_NUMS} i={2} />
                         <TabInfo count={course?.isActive ? lang.ACTIVE : lang.NOT_ACTIVE} title={lang.IS_ACTIVE} i={1} />
-                        <TabInfo count={course.price + lang.POUND} title={lang.PRICE} i={0} />
+                        <TabInfo count={course.price + " " + lang.POUND} title={lang.PRICE} i={0} />
                     </FlexBetween>
 
                     <Separator />

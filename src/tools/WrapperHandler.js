@@ -10,11 +10,11 @@ function WrapperHandler({ children, status, showSuccess = false }) {
         <Box m={'8px 0'}>
 
           {status?.isLoading && <Alert sx={{ maxWidth: '100%', m: '0 auto' }} variant="filled" severity="warning">
-            loading ...
+            يتم تحميل البيانات...!
           </Alert>}
 
           {status?.isError && <Alert sx={{ maxWidth: '100%,', m: '0 auto' }} variant="filled" severity="error">
-            {status?.error && status?.error.error || status.error.data.message || 'some thing went wrong... !'}
+            {status?.error && status?.error.error || status.error.data.message || 'حدث خطا...!'}
           </Alert>
           }
 

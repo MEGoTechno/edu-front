@@ -22,11 +22,13 @@ const usersApi = apiSlice.injectEndpoints({
             })
         }),
         updateUser: builder.mutation({
-            query: (data) => ({
-                url: `/users`,
-                method: 'PUT',
-                body: data
-            })
+            query: (data) => {
+                return {
+                    url: `/users/` + data._id,
+                    method: 'PUT',
+                    body: data
+                }
+            }
         }),
         updateUserProfile: builder.mutation({
             query: (data) => ({
@@ -37,9 +39,9 @@ const usersApi = apiSlice.injectEndpoints({
         }),
         deleteUser: builder.mutation({
             query: (data) => ({
-                url: `/users`,
+                url: `/users/` + data._id,
                 method: 'DELETE',
-                body: data
+                // body: data
             })
         }),
         login: builder.mutation({

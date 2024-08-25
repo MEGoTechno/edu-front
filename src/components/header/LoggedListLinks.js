@@ -5,8 +5,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { RtArrow } from './Icons';
 import { FlexRow } from '../../style/mui/styled/Flexbox';
+import { transform } from 'framer-motion';
 
-function LoggedListLinks({ user }) {
+function LoggedListLinks({ user, setSidebar }) {
     const { pathname } = useLocation()
     const theme = useTheme()
     const [activeLink, setActiveLink] = useState('/test')
@@ -45,6 +46,11 @@ function LoggedListLinks({ user }) {
                             <ListItemButton
                                 component={Link}
                                 to={link.to}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setSidebar(false)
+                                    navigate(link.to)
+                                }}
                                 sx={{
                                     my: '4px',
                                     borderRadius: '16px',
@@ -57,11 +63,11 @@ function LoggedListLinks({ user }) {
                                         activeLink === link.to
                                             ? 'primary.main'
                                             : 'neutral.100',
-                                    "&:hover": {
-                                        // borderColor: theme.palette.primary[500],
-                                        // backgroundColor: theme.palette.primary.main,
-                                        // color: theme.palette.text.hover,
-                                    }
+                                    // "&:hover": {
+                                    // borderColor: theme.palette.primary[500],
+                                    // backgroundColor: theme.palette.primary.main,
+                                    // color: theme.palette.text.hover,
+                                    // }
                                 }}
                             >
                                 <ListItemIcon sx={{
@@ -77,7 +83,8 @@ function LoggedListLinks({ user }) {
                                 <RtArrow size='22px' style={{
                                     marginRight: "auto",
                                     color: theme.palette.primary.main,
-                                    // display: activeLink === link.to ? "block" : "block",
+                                    display: activeLink === link.to ? "block" : "none",
+                                    transform: 'rotate(180deg)'
                                 }} />
                             </ListItemButton>
                         </ListItem>

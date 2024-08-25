@@ -1,11 +1,11 @@
 import { ImageListItem } from '@mui/material'
 import React from 'react'
 
-function Image({ img, title, height, width , sx}) {
+function Image({ img, title, height, width, sx,  }) {
     return (
         <ImageListItem sx={{
             overflow: 'hidden',
-            borderRadius: '16px', width: width || '100%', ...sx
+            borderRadius: '16px', width: width || '100%', ...sx,
         }}>
             <img
                 srcSet={`${img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}

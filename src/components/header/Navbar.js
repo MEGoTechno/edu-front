@@ -82,9 +82,11 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
                 <FlexRow flexGrow={1}>
                     <Button component={Link} to={'/'}>
                         <Avatar sx={{ bgcolor: "primary.main", mr: 1, color: 'grey.0' }}>M</Avatar>
-                        <Typography variant="h6" component="div" >
-                            LOGO
-                        </Typography>
+                        {!isMobileScreen && (
+                            <Typography variant="h6" component="div" >
+                                LOGO
+                            </Typography>
+                        )}
                     </Button>
                 </FlexRow>
 

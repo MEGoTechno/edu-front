@@ -10,6 +10,8 @@ import Grid from '../../style/vanilla/Grid'
 import { FaSquarePhoneFlip } from 'react-icons/fa6'
 import { PiPhoneDisconnectFill } from 'react-icons/pi'
 import gradeConstants from '../../settings/constants/gradeConstants'
+import { IoSchool } from 'react-icons/io5'
+import { MdVerifiedUser } from "react-icons/md";
 
 export default function UserHeader({ children, user, flexDirection = 'row', variant, isAll = false }) {
 
@@ -64,8 +66,8 @@ export default function UserHeader({ children, user, flexDirection = 'row', vari
                 )} */}
                 <Grid>
                     <DataWith3Items title={lang.NAME} icon={<MdOutlineDriveFileRenameOutline size={'2rem'} />} desc={user.name} />
-                    <DataWith3Items title={lang.GRADE} icon={<MdOutlineDriveFileRenameOutline size={'2rem'} />} desc={user.role === user_roles.ADMIN || user.role === user_roles.SUBADMIN ? user.role : gradeConstants.filter(g => g.index === Number(user.grade))[0].name} />
-                    <DataWith3Items title={lang.ROLE} icon={<MdOutlineDriveFileRenameOutline size={'2rem'} />} desc={user.role} />
+                    <DataWith3Items title={lang.GRADE} icon={<IoSchool size={'2rem'} />} desc={user.role === user_roles.ADMIN || user.role === user_roles.SUBADMIN ? user.role : gradeConstants.filter(g => g.index === Number(user.grade))[0].name} />
+                    <DataWith3Items title={lang.ROLE} icon={<MdVerifiedUser size={'2rem'} />} desc={user.role} />
                     {isAll && (
                         <>
                             <DataWith3Items title={lang.USERNAME} icon={<MdOutlineDriveFileRenameOutline size={'2rem'} />} desc={user.userName} />

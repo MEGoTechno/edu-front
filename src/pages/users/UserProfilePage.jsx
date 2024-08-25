@@ -29,7 +29,6 @@ function UserProfilePage() {
     const [sendData, status] = useUpdateUserProfileMutation()
     const [updateProfile] = usePostData(sendData)
 
-    // console.log(user)
     const onSubmit = async (values) => {
         const res = await updateProfile(values, true)
         dispatch(setUser({ ...user, ...res }))

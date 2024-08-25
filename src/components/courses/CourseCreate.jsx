@@ -7,16 +7,14 @@ import { useCreateCourseMutation } from '../../toolkit/apis/coursesApi'
 import { lang } from '../../settings/constants/arlang'
 import { VscSymbolBoolean } from 'react-icons/vsc'
 
-function CourseCreate({ unit, grade, setCourse }) {
+function CourseCreate({ unit, grade, setCourses }) {
 
     const [sendData, status] = useCreateCourseMutation()
     const [createCourse] = usePostData(sendData)
 
     const onSubmit = async (values, props) => {
         const res = await createCourse(values)
-        if (setCourse) {
-            setCourse(res._id)
-        }
+        setCourses(pre => { return [...pre, res] })
         props.resetForm()
     }
 

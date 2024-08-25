@@ -15,8 +15,11 @@ import ModalStyled from '../../style/mui/styled/ModalStyled';
 // req {...filter, ...(sort => sortKey, sortValue), select,  limit, page}
 // * in main fc return {values, count}
 // only for listen
+//filter params +> object has filter keys
+// when update done forget to return the new object to rows
 
-function CrudDatagrid({ filterParams = null, reset, columns, editing, fetchFc, loading, updateFc, deleteFc }) {
+
+function CrudDatagrid({ filterParams = [], reset, columns, editing, fetchFc, loading, updateFc, deleteFc }) {
 
     const [isOpen, setOpenModal] = useState(false)
     const [deleteId, setDeleteId] = useState("")
@@ -51,10 +54,10 @@ function CrudDatagrid({ filterParams = null, reset, columns, editing, fetchFc, l
     }, []);
 
     useEffect(() => {
-        if (filterParams) {
+        if (filterParams.length !== 0) {
             setFilter(filterParams)
         }
-    }, [filterParams])
+    }, [...Object.values(filterParams)])
 
     // for sorting
     const handleSortModelChange = React.useCallback((sortModel) => {
@@ -278,7 +281,7 @@ function CrudDatagrid({ filterParams = null, reset, columns, editing, fetchFc, l
                 }}
 
                 // Hide columns status and traderName, the other columns will remain visible
-                columnVisibilityModel={hideColumns || []}
+                // columnVisibilityModel={hideColumns || []}
                 sx={{
                     bgcolor: 'background.default',
                     height: '70vh',
@@ -294,7 +297,7 @@ function CrudDatagrid({ filterParams = null, reset, columns, editing, fetchFc, l
 
             />
 
-            <ModalStyled open={isOpen} setOpen={setOpenModal} title={'r u sure'} action={handleDeleteClick(deleteId)} />
+            <ModalStyled open={isOpen} setOpen={setOpenModal} title={'هل انت متاكد من حذف المستخدم ؟'} action={handleDeleteClick(deleteId)} />
         </>
 
     )

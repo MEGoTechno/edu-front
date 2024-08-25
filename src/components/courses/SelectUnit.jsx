@@ -10,9 +10,8 @@ import WrapperHandler from '../../tools/WrapperHandler'
 import { Alert } from '@mui/material'
 import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
 
-function SelectUnit({ grade = 0, value, setValue, reset = [] }) {
+function SelectUnit({ grade = 'all', value, setValue, reset = [], units, setUnits }) {
 
-  const [units, setUnits] = useState([])
   const [counts, setCounts] = useState('loading ...')
 
   const [getData, status] = useLazyGetUnitsQuery()

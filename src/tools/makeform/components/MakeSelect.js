@@ -34,7 +34,6 @@ function MakeSelect({ props, inputName, input, value }) {
                 onChange={setValue}
             >
                 {input.options && input.options.map((option, i) => {
-                    console.log(option)
                     if (option?.label) {
                         return (
                             <MenuItem key={i} value={option.value}>{option.label}</MenuItem>

@@ -19,6 +19,8 @@ import { lang } from '../../settings/constants/arlang';
 // constants
 
 import * as Yup from "yup"
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../toolkit/globalSlice';
 // validation: Yup.string().required("مطلوب").min(6, "يجب ان يكون اكثر من 6")
 
 const gradeOptions = () => {
@@ -96,8 +98,7 @@ function SignupForm() {
             name: 'code',
             label: lang.CODE_optional,
             icon: <CiBarcode color='green' />,
-            validation: Yup.string().required("مطلوب").matches(/^[0-9 -]{19}$/, 'Must be exactly 16 digits')
-
+            validation: Yup.string().matches(/^[0-9 -]{19}$/, 'الكود عباره عن 16 رقم')
         }, {
             name: 'password',
             label: lang.PASSWORD,
@@ -116,9 +117,14 @@ function SignupForm() {
     const [sendData, status] = useSignupMutation()
     const [signupFc] = usePostData(sendData)
 
+    const dispatch = useDispatch()
+
     const onSubmit = async (values) => {
-        const res = await signupFc(values)
-        console.log(res)
+        const user = await signupFc(values)
+        console.log(user)
+        if (user) {
+            dispatch(setUser({...user}))
+        }
     }
     return (
         <MakeForm inputs={inputs} onSubmit={onSubmit} btnWidth={'100%'} status={status} />

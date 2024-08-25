@@ -11,9 +11,8 @@ import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
 import { Alert } from '@mui/material'
 import { StyledBtn } from '../../style/mui/btns/buttonsStyles'
 
-function SelectCourse({ unit = 0, value, setValue, reset }) {
+function SelectCourse({ unit = 0, value, setValue, reset, setCourses, courses }) {
 
-    const [courses, setCourses] = useState([])
     const [count, setCount] = useState('loading ...')
 
     const [getData, status] = useLazyGetCoursesQuery()

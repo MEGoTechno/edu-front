@@ -5,7 +5,7 @@ import { useCreateUnitMutation } from '../../toolkit/apis/unitsApi'
 import usePostData from '../../hooks/usePostData'
 import TitleWithDividers from '../ui/TitleWithDividers'
 
-function UnitCreate({ grade }) {
+function UnitCreate({ grade, setUnits }) {
 
     const [sendData, status] = useCreateUnitMutation()
     const [createUnit] = usePostData(sendData)
@@ -13,6 +13,7 @@ function UnitCreate({ grade }) {
     const onSubmit = async (values, props) => {
         const res = await createUnit(values)
         props.resetForm()
+        setUnits(pre => { return [...pre, res] })
     }
 
     const inputs = [

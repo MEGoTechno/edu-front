@@ -24,11 +24,13 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
 
     const theme = useTheme()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const user = useSelector(s => s.global.user)
 
     const logout = () => {
         setModal(false)
         dispatch(setUser(null))
+        navigate('/')
     }
     const [openModal, setModal] = useState(false)
     return (
@@ -55,7 +57,7 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
                 <Box width="100%" mt={"70px"}>
                     {/* drawer items */}
                     <Divider />
-                    <LoggedListLinks user={user} />
+                    <LoggedListLinks user={user} setSidebar={setSideBar} />
                 </Box>
 
                 {/* logout */}
@@ -66,6 +68,7 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
                         {lang.LOGOUT}
                     </ErrorBtn>
                 </Box>}
+
             </Drawer >
             <ModalStyled
                 open={openModal}

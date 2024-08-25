@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Section from "../../style/mui/styled/Section"
 import TitleSection from '../../components/ui/TitleSection'
 import MeDatagrid from '../../tools/datagrid/MeDatagrid'
-import { useLazyGetUsersQuery } from '../../toolkit/apis/usersApi'
+import { useDeleteUserMutation, useLazyGetUsersQuery, useUpdateUserMutation } from '../../toolkit/apis/usersApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
-import {user_roles} from '../../settings/constants/roles'
+import { user_roles } from '../../settings/constants/roles'
 import gradeConstants from '../../settings/constants/gradeConstants'
 import { filterArrWithValue, makeArrWithValueAndLabel } from '../../tools/fcs/MakeArray'
 import TabsStyled from '../../style/mui/styled/TabsStyled'
@@ -19,6 +19,8 @@ import CreateUser from '../../components/users/CreateUser'
 import { FilledHoverBtn } from '../../style/mui/btns/buttonsStyles'
 import { FlexColumn } from '../../style/mui/styled/Flexbox'
 import GradesTabs from '../../components/grades/GradesTabs'
+import usePostData from '../../hooks/usePostData'
+import TabInfo from '../../components/ui/TabInfo'
 
 
 function GetUsersPage() {
@@ -78,25 +80,39 @@ function GetUsersPage() {
         {
             field: 'name',
             headerName: lang.NAME,
-            width: 300
+            width: 200
         }, {
             field: 'email',
             headerName: lang.EMAIL,
-            width: 300
+            width: 200
         }, {
             field: 'userName',
             headerName: lang.USERNAME,
+            width: 150
+
         }, {
             field: 'isActive',
             headerName: lang.IS_ACTIVE,
             type: "boolean",
-            editable: true
+            editable: true,
+            valueGetter: (params) => params.row?.isActive,
+            renderCell: (params) => {
+                return (
+                    <Typography>
+                        {params.row.isActive ? <TabInfo count={lang.ACTIVE} i={1} />
+                            : <TabInfo count={lang.NOT_ACTIVE} i={3} />}
+                    </Typography>
+                )
+            }
         }, {
             field: 'phone',
             headerName: lang.PHONE,
+            width: 200
+
         }, {
             field: 'familyPhone',
             headerName: lang.FAMILY_PHONE,
+            width: 200
         }, {
             field: 'role',
             headerName: lang.ROLE,
@@ -123,7 +139,20 @@ function GetUsersPage() {
         }
     ]
 
+    const [sendData, { isLoading: updateLoader }] = useUpdateUserMutation()
+    const [updateUser] = usePostData(sendData)
 
+    const updateFc = async (values) => {
+        const user = await updateUser(values)
+        return user
+    }
+
+    const [deleteData, { isLoading: deleteLoader }] = useDeleteUserMutation()
+    const [deleteUser] = usePostData(deleteData)
+
+    const deleteFc = async (id) => {
+        await deleteUser({ _id: id })
+    }
     return (
         <Section>
             <TitleSection title={lang.USERS_PAGE} />
@@ -132,11 +161,11 @@ function GetUsersPage() {
             </FlexColumn>
 
             <GradesTabs setGrade={setGrade} counts={gradesCounts} />
-  
+
             <MeDatagrid
-                filterParams={grade}
+                filterParams={{ grade: grade || 'all' }}
                 type={'crud'}
-                columns={columns} fetchFc={fetchFc} loading={isLoading}
+                columns={columns} fetchFc={fetchFc} loading={isLoading || updateLoader || deleteLoader} updateFc={updateFc} deleteFc={deleteFc}
                 editing={
                     {
                         bgcolor: 'background.alt',

@@ -17,6 +17,7 @@ import { manageCoursesRoutes } from "./manageCoursesRoutes";
 import { codesRoutes } from "./codesRoutes";
 import LectureCreate from "../../components/courses/LectureCreate";
 import { userRoutes } from "./userRoutes";
+import NotFoundPage from "../../pages/errors/NotFoundPage";
 
 export const routes = [
     {
@@ -51,7 +52,7 @@ export const routes = [
             }, {
                 path: '/test', element: <TestPage />
             }, {
-                path: '*', element: <>Not Found 404</>
+                path: '*', element: <NotFoundPage />
             }
         ]
     },

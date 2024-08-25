@@ -28,7 +28,6 @@ function LoginPage() {
   const user = useSelector(s => s.global.user)
 
   useEffect(() => {
-
     if (user) {
       navigate('/')
     }
