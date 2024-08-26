@@ -30,7 +30,7 @@ export default function CardCourse({ img, title, children, borderColor }) {
 
       <ImageListItem sx={{
         overflow: 'hidden',
-        borderRadius: '16px', width: '100%',
+        borderRadius: '16px', width: '100%', maxHeight: '250px',bgcolor: 'orange'
       }}>
         <img
           srcSet={`${img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
@@ -45,7 +45,7 @@ export default function CardCourse({ img, title, children, borderColor }) {
       </ImageListItem>
 
       <Box sx={{
-        m: '8px auto', padding: '22px', width: '80%', flex: '1', mt: '-40px', position: 'relative', zIndex: '3',
+        m: '8px auto', padding: '22px', width: '80%', flex: '1', mt: '-60px', position: 'relative', zIndex: '3',
         bgcolor: 'background.alt', color: 'neutral.0',
         boxShadow: theme.shadows[8], borderRadius: " 8px", display: 'flex', flexDirection: 'column', border: '4px solid ', borderColor: borderColor || 'orange'
       }}>

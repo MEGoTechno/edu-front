@@ -5,14 +5,14 @@ import Section from "../../style/mui/styled/Section"
 import TitleSection from '../../components/ui/TitleSection'
 import { LoginAnimatedIcon, ReactLoginIcon } from '../../components/ui/svg/Registers'
 import LoginForm from '../../components/auth/LoginForm'
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, Typography, useTheme, Link as MuiLink } from '@mui/material'
 import { FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
 import DnaAnimation from '../../components/animations/dna/DnaAnimation'
 import { RtArrow } from '../../components/header/Icons'
 import BannerAuth from '../../components/ui/BannerAuth'
 import TextBorderAround from '../../components/ui/TextBorderAround'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { lang } from '../../settings/constants/arlang'
 
 
@@ -66,6 +66,12 @@ function LoginPage() {
           {/* login form */}
           <Box sx={{}}>
             <LoginForm />
+            <FlexRow gap={1}>
+              <Typography variant='body1'>
+                ليس لديك حساب ؟
+              </Typography>
+              <MuiLink component={Link} to="/signup" underline='hover' sx={{ cursor: 'pointer' }}>انشئ حساب الان !</MuiLink>
+            </FlexRow>
           </Box>
 
         </Box>

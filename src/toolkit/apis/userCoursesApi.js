@@ -42,5 +42,5 @@ const userCoursesApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useLazyGetUserCoursesQuery, useGetUserCoursesQuery, useGetOneUserCourseQuery, useGetAllUsersCoursesQuery, useSubscribeMutation
+export const { useLazyGetUserCoursesQuery, useGetUserCoursesQuery, useGetOneUserCourseQuery, useGetAllUsersCoursesQuery,useLazyGetAllUsersCoursesQuery, useSubscribeMutation
 } = userCoursesApi

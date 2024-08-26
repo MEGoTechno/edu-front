@@ -14,6 +14,8 @@ import { Alert } from '@mui/material'
 import { lang } from '../../settings/constants/arlang'
 
 import { FcStatistics } from "react-icons/fc";
+import { useGetAllUsersCoursesQuery } from '../../toolkit/apis/userCoursesApi'
+import { getFullDate } from '../../settings/constants/dateConstants'
 
 
 function AdminCourseDetails({ courseId }) {
@@ -21,6 +23,8 @@ function AdminCourseDetails({ courseId }) {
     const [course, setCourse] = useState(null)
     const [getData, status] = useLazyGetOneCourseQuery()
     const [getOneCourse] = useLazyGetData(getData)
+
+    const { data: subscribers } = useGetAllUsersCoursesQuery({ course: courseId })
 
     useEffect(() => {
 
@@ -46,9 +50,10 @@ function AdminCourseDetails({ courseId }) {
 
                     <FlexBetween width={"100%"}>
                         <OutLinedHoverBtn sx={{ my: '12px' }} colorm='orange' endIcon={<FcStatistics />}>{lang.STATISTICS}</OutLinedHoverBtn>
-                        <TabInfo count={'2000'} title={lang.SUBSCRIBERS_NUMS} i={2} />
+                        <TabInfo count={subscribers?.values?.count || Number(subscribers?.values?.count) === 0 ? 0 : "يتم التحميل"} title={lang.SUBSCRIBERS_NUMS} i={2} />
                         <TabInfo count={course?.isActive ? lang.ACTIVE : lang.NOT_ACTIVE} title={lang.IS_ACTIVE} i={1} />
                         <TabInfo count={course.price + " " + lang.POUND} title={lang.PRICE} i={0} />
+                        <TabInfo count={getFullDate(course.createdAt)} title={'تاريخ الانشاء'} i={1} />
                     </FlexBetween>
 
                     <Separator />

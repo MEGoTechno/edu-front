@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import MakeForm from '../../tools/makeform/MakeForm'
 import Section from '../../style/mui/styled/Section'
 import usePostData from '../../hooks/usePostData'
@@ -6,6 +6,11 @@ import TitleWithDividers from '../ui/TitleWithDividers'
 import { useCreateCourseMutation } from '../../toolkit/apis/coursesApi'
 import { lang } from '../../settings/constants/arlang'
 import { VscSymbolBoolean } from 'react-icons/vsc'
+import { AiFillPoundCircle } from 'react-icons/ai'
+
+import * as Yup from "yup"
+
+
 
 function CourseCreate({ unit, grade, setCourses }) {
 
@@ -43,16 +48,27 @@ function CourseCreate({ unit, grade, setCourses }) {
             type: 'radio',
             options: [{ value: true, label: lang.ACTIVE }, { value: false, label: lang.NOT_ACTIVE }],
             icon: <VscSymbolBoolean />
-        },
-        {
-            name: 'price',
-            label: "Course Price",
-            type: 'number'
         }, {
-            name: 'discount',
-            label: "Course Discount",
-            type: 'number'
-        },
+            name: 'price',
+            label: lang.PRICE,
+            icon: <AiFillPoundCircle />,
+            width: "40%",
+            validation: Yup
+                .number()
+                .integer()
+                .required()
+        }, {
+            name: 'preDiscount',
+            label: 'السعر قبل الخصم',
+            icon: <AiFillPoundCircle />,
+            width: "40%",
+            validation: Yup
+                .number()
+                .required()
+                .integer()
+                .nullable()
+                .moreThan(Yup.ref("price")) //<-- a whole lot neater than using a when conditional...
+        }
     ]
 
 

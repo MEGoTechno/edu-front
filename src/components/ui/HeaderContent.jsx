@@ -24,10 +24,10 @@ function HeaderContent({ title, body, infos = [], img, children, height = '86vh'
                     position: 'absolute', borderRadius: '16px', top: '0', right: '0', width: '100%', height: '100%',
                     background: `linear-gradient(to left, ${theme.palette.primary.light} 80%, ${theme.palette.primary.dark} 80%)`, opacity: .9 //linear-gradient(to left, ${theme.palette.primary.light} 30%, ${theme.palette.primary.dark} 75%) `linear-gradient(45deg,transparent 42%,#9400ff 42%)`
                 }} />
-                <FlexColumn sx={{ zIndex: 1 }}>
+                <FlexColumn sx={{ zIndex: 1, p: '30px 15px' }}>
 
 
-                    <Typography mr={'auto'} variant='h2' sx={{ color: 'grey.0', zIndex: 1, textShadow: theme.shadows[8] }}>{title} </Typography>
+                    <Typography mr={'auto'} variant='h5' sx={{ color: 'grey.0', zIndex: 1, textShadow: theme.shadows[8] }}>{title} </Typography>
 
                     <Typography mr={'auto'} variant='body1' sx={{ color: '#fff', zIndex: 1, maxWidth: '800px', my: '16px' }}>
                         {body} <br />

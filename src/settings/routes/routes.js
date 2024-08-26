@@ -18,6 +18,8 @@ import { codesRoutes } from "./codesRoutes";
 import LectureCreate from "../../components/courses/LectureCreate";
 import { userRoutes } from "./userRoutes";
 import NotFoundPage from "../../pages/errors/NotFoundPage";
+import { subscriptions } from "./subscriptions";
+import PaymentsPage from "../../pages/subscribtions/PaymentsPage";
 
 export const routes = [
     {
@@ -42,9 +44,12 @@ export const routes = [
                 path: '/management/courses', children: manageCoursesRoutes,
             }, {
                 path: '/management/codes', children: codesRoutes,
-            },
-            {
+            }, {
+                path: '/management/subscriptions', children: subscriptions,
+            }, {
                 path: '/management/lectures/create', element: <LectureCreate />
+            }, {
+                path: '/management/payments', element: <PaymentsPage />
             }, {
                 path: '/login', element: <LoginPage />
             }, {

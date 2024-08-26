@@ -8,7 +8,7 @@ import AccordionStyled from '../../style/mui/styled/AccordionStyled'
 import TitleSection from '../../components/ui/TitleSection'
 import HeaderContent from '../../components/ui/HeaderContent'
 import { RtArrow } from '../../components/header/Icons'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { CoursesIcon, UnitsIcon, VidsIcon2 } from '../../components/ui/svg/ContentSvgs'
 import { useLazyGetCoursesCountQuery, useLazyGetLecturesCountQuery, useLazyGetUnitsCountQuery } from '../../toolkit/apis/statisticsApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
@@ -22,6 +22,7 @@ import { useLazyGetCoursesQuery } from '../../toolkit/apis/coursesApi'
 
 import Separator from "../../components/ui/Separator"
 import UnitCourses from '../../components/grades/UnitCourses'
+import { useSelector } from 'react-redux'
 
 
 function UnitsPage() {
@@ -29,8 +30,9 @@ function UnitsPage() {
   const theme = useTheme()
 
   const { gradeId } = useParams()
+  const user = useSelector(s => s.global.user)
 
-
+  const navigate = useNavigate()
   const [units, setUnits] = useState([])
   const [courses, setCourses] = useState({})
 
@@ -44,8 +46,17 @@ function UnitsPage() {
       setUnits(res.units)
     }
 
-    trigger()
-  }, [])
+    if (gradeId !== "undefined") {
+      trigger()
+    } else {
+
+      if (user) { navigate('/grades/' + user.grade) }
+    }
+  }, [gradeId])
+
+  if (gradeId === "undefined" || gradeId === undefined) {
+    return
+  }
 
   return (
     <Section>

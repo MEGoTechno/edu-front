@@ -23,6 +23,7 @@ import { useLazyGetLecturesCountQuery } from '../../toolkit/apis/statisticsApi'
 import useLazyGetData from '../../hooks/useLazyGetData'
 import { FilledHoverBtn, OutLinedHoverBtn } from '../../style/mui/btns/buttonsStyles'
 import { useSelector } from 'react-redux'
+import { lang } from '../../settings/constants/arlang'
 
 function UserCourseDetails({ course, subscribedAt }) {
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ function UserCourseDetails({ course, subscribedAt }) {
     if (!course) return <>loading ...!</>
 
     return (
-        <CardStyled img={'/assets/3rd.jpg'} title={<Button startIcon={<RtArrow size='1.5rem' />} endIcon={<CoursesIcon size='1.5rem' />} sx={{ color: 'primary.main' }}
+        <CardStyled img={'/assets/course.png'} title={<Button startIcon={<RtArrow size='1.5rem' />} endIcon={<CoursesIcon size='1.5rem' />} sx={{ color: 'primary.main' }}
             component={Link} to={"courses/" + course.index} onClick={goCourse}
         >
 
@@ -65,15 +66,16 @@ function UserCourseDetails({ course, subscribedAt }) {
 
         </Button>}
             // btn2={!subscribedAt && (<OutLinedHoverBtn sx={{ width: '100%' }} endIcon={<MdOutlinePayment />} >subsrcibe</OutLinedHoverBtn>)}
-            btn1={<FilledHoverBtn FilledHoverBtn sx={{ width: '100%' }} component={Link} to={"courses/" + course.index} onClick={goCourse} endIcon={< FaArrowRight />} > go to course</FilledHoverBtn >
+            btn1={
+                <FilledHoverBtn FilledHoverBtn sx={{ width: '100%' }} component={Link} to={"courses/" + course.index} onClick={goCourse} endIcon={< FaArrowRight />} > الذهاب للكورس  </FilledHoverBtn >
             }>
 
             <FlexColumn>
 
                 <FlexBetween gap={'12px'} mt={'16px'}>
-                    <TabInfo count={lecturesCount} i={'3'} title={'lectures'} icon={<VidsIcon2 size='1.5rem' />} />
-                    <TabInfo count={'10'} i={'3'} title={'files'} icon={<FilesIcon size={'1.5rem'} />} />
-                    <TabInfo count={'10'} i={'3'} title={'Exams'} icon={<ExamIcon size='1.5rem' />} />
+                    <TabInfo count={lecturesCount} i={'1'} title={lang.LECTURES} icon={<VidsIcon2 size='1.5rem' />} />
+                    <TabInfo count={'0'} i={'2'} title={lang.FILES} icon={<FilesIcon size={'1.5rem'} />} />
+                    <TabInfo count={'0'} i={'3'} title={lang.EXAMS} icon={<ExamIcon size='1.5rem' />} />
                     <TabInfo count={getFullDate(course.createdAt)} i={'1'} title={'تاريخ انشاء الكورس'} icon={<MdDateRange size='1rem' />} isBold={false} />
                     {subscribedAt && (
                         <TabInfo count={getFullDate(subscribedAt)} i={'2'} title={'تاريخ الاشتراك بالكورس'} icon={<MdDateRange size='1rem' />} isBold={false} />
@@ -83,10 +85,10 @@ function UserCourseDetails({ course, subscribedAt }) {
                     <Box mt={'20px'}>
 
                         <RowInfo title={'سعر الكورس'} desc={<Typography variant='subtitle2' >{course.price} جنيها</Typography>} icon={<AiFillPoundCircle size='1rem' />} bgcolor='primary.500' />
-                        {course.discount && (
+                        {(course.preDiscount !== course.price + 1) && (
                             <>
                                 <Separator sx={{ width: '100px', borderWidth: '2px', mr: 'auto' }} />
-                                <TabInfo title={'discount'} count={course.discount + ' $'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                                <TabInfo title={lang.PRE_DISCOUNT} count={course.preDiscount + ' $'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
                             </>
                         )}
                     </Box>

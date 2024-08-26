@@ -297,7 +297,7 @@ function CrudDatagrid({ filterParams = [], reset, columns, editing, fetchFc, loa
 
             />
 
-            <ModalStyled open={isOpen} setOpen={setOpenModal} title={'هل انت متاكد من حذف المستخدم ؟'} action={handleDeleteClick(deleteId)} />
+            <ModalStyled open={isOpen} setOpen={setOpenModal} title={'هل انت متاكد من الحذف  ؟'} action={handleDeleteClick(deleteId)} />
         </>
 
     )

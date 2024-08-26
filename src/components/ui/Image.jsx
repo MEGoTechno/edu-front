@@ -1,7 +1,7 @@
 import { ImageListItem } from '@mui/material'
 import React from 'react'
 
-function Image({ img, title, height, width, sx,  }) {
+function Image({ img, title, width, sx, }) {
     return (
         <ImageListItem sx={{
             overflow: 'hidden',

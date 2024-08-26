@@ -1,7 +1,7 @@
 export const user_roles = {
-    ADMIN: "admin",
-    SUBADMIN: "subAdmin",
-    STUDENT: "student",
-    ONLINE: 'online',
-    INREVIEW: "inreview",
+    ADMIN: "أدمن",
+    SUBADMIN: "مشرف",
+    STUDENT: "طالب",
+    ONLINE: 'اونلاين',
+    INREVIEW: "تحت المراجعه",
 }

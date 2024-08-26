@@ -44,6 +44,7 @@ function LoggedListLinks({ user, setSidebar }) {
                     return (
                         <ListItem key={i} sx={{ p: "0 10px" }}>
                             <ListItemButton
+                                disabled={link.disabled}
                                 component={Link}
                                 to={link.to}
                                 onClick={(e) => {

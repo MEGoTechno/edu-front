@@ -23,6 +23,7 @@ function GetCodesPage() {
 
     const fetchFc = async (params) => {
         const res = await getCodes(params, false)
+        console.log(res)
         const codes = { values: res.codes, count: res.count }
         return codes
     }
@@ -47,38 +48,39 @@ function GetCodesPage() {
     const columns = [
         {
             field: 'code',
-            headerName: "code",
+            headerName: "الكود",
             width: 180
         }, {
             field: 'price',
-            headerName: "price",
+            headerName: "السعر",
             width: 170,
             type: 'number',
             editable: true
         }, {
             field: 'grade',
-            headerName: "grade",
+            headerName: "السنه",
             width: 170
 
         }, {
             field: 'type',
-            headerName: 'type of code',
+            headerName: 'نوع الكود',
             type: 'singleSelect',
-            width: 170
-        }, {
-            field: 'usedBy',
-            headerName: "used by",
-            width: 170
-        }, {
+            width: 170}
+            // }, {
+            //     field: 'usedBy',
+            //     headerName: "used by",
+            //     width: 170,
+            // }, {
+            ,{
             field: 'isActive',
-            headerName: "isActive",
+            headerName: "الحاله",
             type: "boolean",
             width: 170,
             editable: true
 
         }, {
             field: 'numbers',
-            headerName: "numbers of use",
+            headerName: "عدد مرات الاستخدام",
             width: 170,
             editable: true
         },

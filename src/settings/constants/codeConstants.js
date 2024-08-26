@@ -1,5 +1,5 @@
 export const codeConstants = {
-    WALLET: 'wallet', // ==> price
-    CENTER: 'center', // ==> grade
-    ACTIVATE: 'activate' 
+    WALLET: 'محفظه', // ==> price
+    CENTER: 'سنتر', // ==> grade
+    ACTIVATE: 'تفعيل' 
 }

@@ -22,6 +22,7 @@ import Loader from '../../style/mui/loaders/Loader'
 import CourseSubscribeCard from '../../components/courses/CourseSubscribeCard'
 import LoaderSkeleton from '../../style/mui/loaders/LoaderSkeleton'
 import LoaderWithText from '../../style/mui/loaders/LoaderWithText'
+import { lang } from '../../settings/constants/arlang'
 
 function CoursePage() {
 
@@ -95,11 +96,11 @@ function CoursePage() {
       <HeaderContent title={course.name} body={<span dangerouslySetInnerHTML={{ __html: course.description }} />}
         infos={[
           {
-            caption: 'lectures', desc: '+ ' + counts.lectures, icon: <VidsIcon2 size='1.5rem' />
+            caption: lang.LECTURES, desc: '+ ' + counts.lectures, icon: <VidsIcon2 size='1.5rem' />
           }, {
-            caption: 'Files', desc: '+ 0', icon: <FilesIcon size='1.5rem' />
+            caption: lang.FILES, desc: '+ 0', icon: <FilesIcon size='1.5rem' />
           }, {
-            caption: 'Exams', desc: '+ 0', icon: <ExamIcon size='1.5rem' />
+            caption: lang.EXAMS, desc: '+ 0', icon: <ExamIcon size='1.5rem' />
           }
         ]}
       >
@@ -108,10 +109,10 @@ function CoursePage() {
           : <Loader />}
       </HeaderContent>
 
-      <TitleSection title={'course content'} />
+      <TitleSection title={'محتوى الكورس'} />
 
       <Box >
-        <AccordionStyled title={'lectures'} setExpanded={setExpand} expanded={expand}>
+        <AccordionStyled title={lang.LECTURES} setExpanded={setExpand} expanded={expand}>
           {status.isLoading && (
             <LoaderWithText />
           )}
@@ -121,9 +122,7 @@ function CoursePage() {
             {lectures?.length === 0 ? <Alert variant='filled' severity='warning'>عذرًا، سيتم إضافة المحاضرات قريبا...!</Alert> : lectures.map((lecture, i) => {
               return <CardHover key={i} img={lecture?.thumbnail?.url || '/assets/3rd.jpg'} title={lecture?.name} desc={<span dangerouslySetInnerHTML={{ __html: lecture.description }} />} to={'lectures/' + lecture._id} >
                 <FlexColumn>
-                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
-                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
-                  <TabInfo title={'duration'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                  {/* <TabInfo title={'الوقت'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} /> */}
                 </FlexColumn>
               </CardHover>
             })}

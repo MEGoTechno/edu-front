@@ -4,11 +4,11 @@ import Separator from '../../../components/ui/Separator'
 
 function CardStyled({ img, title, description, children, btn1, btn2 }) {
     return (
-        <Card sx={{ maxWidth: 400 }}>
+        <Card sx={{ maxWidth: "430px" }}>
             <Box sx={{ p: '16px', pb: 0, overflow: 'hidden' }}>
                 <CardMedia
                     sx={{ minHeight: 150, borderRadius: '16px', }}
-                    image={'/assets/3rd.jpg' || '#'}
+                    image={img || '#'}
                     title={title || 'thumbnail'}
                 />
             </Box>

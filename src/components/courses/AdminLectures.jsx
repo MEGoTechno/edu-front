@@ -33,7 +33,6 @@ function AdminLectures({ course, unit, grade }) {
     trigger()
   }, [course])
 
-  const addLecture = (lecture => setLectures([...lectures, lecture]))
 
   if (status.isLoading) return <LoaderWithText />
 
@@ -44,27 +43,30 @@ function AdminLectures({ course, unit, grade }) {
 
     <OutLinedHoverBtn sx={{ m: '0 auto', width: '100%' }} onClick={() => setOpen(true)}>{lang.ADD_LECTURE}</OutLinedHoverBtn>
     <ModalStyled open={open} setOpen={setOpen} >
-      <LectureCreate unit={unit} grade={grade} course={course} addLecture={addLecture} />
+      <LectureCreate unit={unit} grade={grade} course={course} setLectures={setLectures} />
     </ModalStyled>
 
   </Box>
 
   return (
     <div>
-      <TitleWithDividers title={'lectures'} />
+      <TitleWithDividers title={lang.LECTURES} />
       <FlexColumn gap={'10px'} width={'100%'} >
         {lectures?.map((lecture, i) => {
-          return <>
-            <AdminCardLecture key={i} lecture={lecture} />
+          return <React.Fragment key={i}>
+            <AdminCardLecture lecture={lecture} />
             <Separator />
-          </>
+          </React.Fragment>
         })}
 
       </FlexColumn>
 
-      <OutLinedHoverBtn sx={{ m: '0 auto', width: '100%' }} onClick={() => setOpen(true)} >add lecture</OutLinedHoverBtn>
+      <OutLinedHoverBtn sx={{ m: '0 auto', width: '100%' }} onClick={() => setOpen(true)} >{lang.ADD_LECTURE}</OutLinedHoverBtn>
       <ModalStyled open={open} setOpen={setOpen} >
-        <LectureCreate unit={unit} grade={grade} course={course} addLecture={addLecture} />
+        {(unit && grade && course) ?
+          <LectureCreate unit={unit} grade={grade} course={course} setLectures={setLectures} />
+          : <Alert severity='warning'>من فضلك اختر وحده !</Alert>
+        }
       </ModalStyled>
     </div>
   )

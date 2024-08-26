@@ -9,13 +9,15 @@ import { AiFillPoundCircle } from "react-icons/ai";
 
 import { VscSymbolBoolean } from "react-icons/vsc";
 
+
+import * as Yup from "yup"
+
 function CourseUpdate({ course }) {
 
     // console.log(course)
 
     const [sendData, status] = useUpdateCourseMutation()
     const [updateCourse] = usePostData(sendData)
-
     const inputs = [
         {
             name: 'id',
@@ -38,20 +40,24 @@ function CourseUpdate({ course }) {
             label: lang.PRICE,
             value: course.price,
             icon: <AiFillPoundCircle />,
-            width: "40%"
+            width: "40%",
+            validation: Yup
+                .number()
+                .integer()
+                .required()
         }, {
-            name: 'discount',
-            label: lang.PRICE,
-            value: course.price,
+            name: 'preDiscount',
+            label: 'السعر قبل الخصم',
+            value: course.preDiscount,
             icon: <AiFillPoundCircle />,
             width: "40%",
-        },{
-            name: 'isDiscount',
-            label: lang.PRICE,
-            value: false,
-            icon: <AiFillPoundCircle />,
-            width: "10%",
-            type: 'switch'
+            validation: Yup
+                .number()
+                .integer()
+                .nullable()
+                .moreThan(Yup.ref("price")) //<-- a whole lot neater than using a when conditional...
+            // .max(currentYear + 1)
+            // ref: 'isDiscount'
         }, {
             name: 'isActive',
             label: lang.IS_ACTIVE,
@@ -60,7 +66,6 @@ function CourseUpdate({ course }) {
             options: [{ value: true, label: lang.ACTIVE }, { value: false, label: lang.NOT_ACTIVE }],
             icon: <VscSymbolBoolean />,
             width: "100%",
-
         }
     ]
 

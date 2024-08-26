@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import React, { useState } from 'react'
 
-export default function SimpleDatagrid({ rows, columns, loading }) {
+export default function SimpleDatagrid({ rows, columns, loading = false }) {
 
 
     return (
@@ -10,7 +10,7 @@ export default function SimpleDatagrid({ rows, columns, loading }) {
             rows={rows}
             columns={columns}
             loading={loading}
-            getRowId={(param) => param._id}
+            getRowId={(param) => param?._id}
 
             pageSizeOptions={[5, 10, 50, 100]}
         />

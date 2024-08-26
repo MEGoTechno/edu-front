@@ -9,7 +9,7 @@ import gradeConstants from '../../settings/constants/gradeConstants'
 import { useCreateCodeMutation } from '../../toolkit/apis/codesApi'
 
 import usePostData from '../../hooks/usePostData'
-function CreateCode({setReset}) {
+function CreateCode({ setReset }) {
 
 
     const [sendData, status] = useCreateCodeMutation()
@@ -21,12 +21,12 @@ function CreateCode({setReset}) {
     const activateInput = [
         {
             name: 'type',
-            label: 'code type',
+            label: 'نوع الكود',
             type: 'select',
             options: [codeConstants.ACTIVATE],
         }, {
             name: 'uses',
-            label: 'code uses',
+            label: 'العدد المسموح به للاستخدام',
             type: 'number',
             value: 1
         }
@@ -34,34 +34,34 @@ function CreateCode({setReset}) {
     const walletInputs = [
         {
             name: 'type',
-            label: 'code type',
+            label: 'نوع الكود',
             type: 'select',
             options: [codeConstants.WALLET],
         }, {
             name: 'uses',
-            label: 'code uses',
+            label: 'العدد المسموح به للاستخدام',
             type: 'number',
             value: 1
         }, {
             name: 'price',
-            label: 'code price',
+            label: 'سعر الكود',
             type: 'number'
         }
     ]
     const centerInputs = [
         {
             name: 'type',
-            label: 'code type',
+            label: 'نوع الكود',
             type: 'select',
             options: [codeConstants.CENTER],
         }, {
             name: 'uses',
-            label: 'code uses',
+            label: 'العدد المسموح به للاستخدام',
             type: 'number',
             value: 1
         }, {
             name: 'grade',
-            label: 'code grade',
+            label: 'السنه الدراسيه التي سينضم لها الطالب',
             type: 'select',
             options: makeArrWithValueAndLabel(gradeConstants, { value: 'index', label: 'name' }),
         }
@@ -69,14 +69,16 @@ function CreateCode({setReset}) {
 
     const onSubmit = async (values, props) => {
         const res = await createCode(values)
-        setReset(pre => !pre)
+        if (setReset) {
+            setReset(pre => !pre)
+        }
         props.resetForm()
     }
 
     return (
         <Section>
-            <Typography variant='h6' textAlign={'center'} borderBottom={'4px solid'} my={'16px'}>create code</Typography>
-            <MakeSelect title={'choose code type'} value={type} setValue={setType}
+            <Typography variant='h6' textAlign={'center'} borderBottom={'4px solid'} my={'16px'}>انشاء كود</Typography>
+            <MakeSelect title={'اختر كود'} value={type} setValue={setType}
                 options={[codeConstants.ACTIVATE, codeConstants.CENTER, codeConstants.WALLET]}
             />
 

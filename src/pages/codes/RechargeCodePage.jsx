@@ -9,6 +9,9 @@ import { useVerifyCodeMutation } from '../../toolkit/apis/codesApi'
 import usePostData from "../../hooks/usePostData"
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../../toolkit/globalSlice'
+import { lang } from '../../settings/constants/arlang'
+import { CiBarcode } from 'react-icons/ci'
+import * as Yup from 'yup'
 
 function RechargeCodePage() {
 
@@ -20,9 +23,11 @@ function RechargeCodePage() {
 
     const inputs = [
         {
-            label: 'Your code',
-            name: 'code'
-        }
+            name: 'code',
+            label: lang.CODE,
+            icon: <CiBarcode color='green' />,
+            validation: Yup.string().matches(/^[0-9 -]{19}$/, 'الكود عباره عن 16 رقم')
+        },
     ]
 
     const onSubmit = async (values, props) => {
@@ -33,9 +38,9 @@ function RechargeCodePage() {
 
     return (
         <Section>
-            <TitleSection title={'recharge code'} />
+            <TitleSection title={'شحن كود'} />
             <FlexRow>
-                <Typography variant='subtitle1'>insert Your code here</Typography>
+                <Typography variant='subtitle1'>اكتب الكود المكون من 16 رقم هنا</Typography>
                 <MakeForm inputs={inputs} onSubmit={onSubmit} status={status} />
             </FlexRow>
         </Section>

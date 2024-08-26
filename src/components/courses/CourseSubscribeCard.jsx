@@ -15,6 +15,7 @@ import usePostData from '../../hooks/usePostData'
 import { setUser } from '../../toolkit/globalSlice'
 import { getFullDate } from '../../settings/constants/dateConstants'
 import { useNavigate } from 'react-router-dom'
+import { lang } from '../../settings/constants/arlang'
 
 function CourseSubscribeCard({ course }) {
 
@@ -38,6 +39,7 @@ function CourseSubscribeCard({ course }) {
         }
         const res = await subscribeFc({ course: course._id })
         dispatch(setUser({ ...user, wallet: res.wallet }))
+        setSubscribed(true)
         setUserCourse(res.userCourse)
     }
 
@@ -48,19 +50,20 @@ function CourseSubscribeCard({ course }) {
         }
     }, [data])
 
+
     return (
-        <CardCourse img={'/assets/3rd.jpg'} title={course.name} borderColor="transparent">
+        <CardCourse img={'/assets/course.png'} title={course.name} borderColor="transparent">
             {isSubscribed ? <TabInfo count={getFullDate(userCourse.createdAt)} i={1} title={'اشتركت فى'} /> :
                 <>
                     <RowInfo title={'سعر الكورس'} desc={`${course.price} جنيها`} icon={<AiFillPoundCircle size={'1.25rem'} />} />
-                    {course.discount && (
+                    {course.preDiscount !== course.price + 1 && (
                         <>
                             <Separator sx={{ width: '100px', borderWidth: '2px', mr: 'auto' }} />
-                            <TabInfo title={'discount'} count={course.discount + ' $'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
+                            <TabInfo title={lang.PRE_DISCOUNT} count={course.preDiscount + ' $'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} />
                         </>
                     )}
 
-                    <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} onClick={() => setOpen(true)} disabled={status.isLoading} > {status.isLoading ? <Loader color={'orange'} /> : "subscribe now"} </FilledHoverBtn>
+                    <FilledHoverBtn sx={{ mt: '16px', width: '100%' }} onClick={() => setOpen(true)} disabled={status.isLoading} > {status.isLoading ? <Loader color={'orange'} /> : "اشترك الان"} </FilledHoverBtn>
 
                     <Link href="#" underline="hover" mr={'auto'}>
                         سياسه شراء الكورسات
@@ -68,7 +71,7 @@ function CourseSubscribeCard({ course }) {
 
                     <WrapperHandler status={status} showSuccess={true} />
                 </>}
-            <ModalStyled action={subscribe} open={open} setOpen={setOpen} title={'هل انت متاكد من الاشتراك بهذا الكوورس ؟'} desc={user ? `سيتم خصم ${course.discount || course.price} من محفظتك` : 'please, make account first!'} />
+            <ModalStyled action={subscribe} open={open} setOpen={setOpen} title={user ? 'هل انت متاكد من الاشتراك بهذا الكوورس ؟' : 'تسجيل الدخول اولا ؟'} desc={user ? `سيتم خصم ${course.price} من محفظتك` : 'الذهاب إلي صفحة تسجيل الدخول !'} />
         </CardCourse>
     )
 }

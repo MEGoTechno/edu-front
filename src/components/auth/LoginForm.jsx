@@ -38,9 +38,7 @@ function LoginForm() {
     const [loginFc] = usePostData(sendData)
 
     const onSubmit = async (values) => {
-        console.log(values)
         const res = await loginFc(values)
-        console.log(res)
         dispatch(setUser(res))
     }
 

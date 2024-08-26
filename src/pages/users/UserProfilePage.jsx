@@ -70,7 +70,6 @@ function UserProfilePage() {
             disabled: true,
             hidden: true,
             value: user._id,
-
         }
     ]
 

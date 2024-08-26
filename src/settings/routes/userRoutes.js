@@ -1,4 +1,5 @@
 import RechargeCodePage from "../../pages/codes/RechargeCodePage";
+import UserPayments from "../../pages/users/UserPayments";
 import UserProfilePage from '../../pages/users/UserProfilePage'
 import { user_roles } from "../constants/roles";
 import ProtectedRoute from "./ProtectedRoute";
@@ -19,6 +20,10 @@ export const userRoutes = [
     }, {
         path: '/user/recharge_code', element: <ProtectedRoute allowedTo={[user_roles.ONLINE, user_roles.STUDENT]}>
             <RechargeCodePage />
+        </ProtectedRoute>
+    }, {
+        path: '/user/payments', element: <ProtectedRoute allowedTo={[user_roles.ONLINE, user_roles.STUDENT]}>
+            <UserPayments />
         </ProtectedRoute>
     }
 ]

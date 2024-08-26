@@ -49,7 +49,7 @@ export const lang = {
 
     STATISTICS: 'الإحصائيات',
     SUBSCRIBERS_NUMS: 'عدد المشتركون',
-    PRICE: "السعر",
+    PRICE: "السعر الفعلى",
     COURSE_NAME: 'اسم الكورس',
     POUND: "جنيها",
 
@@ -63,7 +63,16 @@ export const lang = {
     NO_LECTURES_IN_THIS_COURSE: 'لا توجد محاضرات في هذا الكورس',
     VIDEO: 'فيديو',
     THUMBNAIL: 'صوره',
+    FILES: 'ملفات',
+    EXAMS: "الاختبارات",
+    PRE_DISCOUNT: 'السعر قبل الخصم',
 
+    TIME: 'الوقت',
+    QUESTIONS: 'الاسئله',
+    ATTEMPT: 'محاوله',
+    ATTEMPTS: 'المحاولات',
+    YOUR_ATTEMPTS: 'عدد مرات اداء الاختبار',
+    START:"ابدا",
     //errors
     REQUERIED: 'مطلوب',
     ARE_YOU_SURE: "هل انت متاكد...؟",

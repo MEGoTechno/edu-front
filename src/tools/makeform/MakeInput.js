@@ -1,6 +1,6 @@
 import { Box, FormControl, FormHelperText, InputAdornment, InputLabel, MenuItem, Select, Switch, TextField, Typography } from '@mui/material'
 import { ErrorMessage, FastField, Field, useField } from 'formik'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import MakeFieldArray from './MakeFieldArray'
 import MakeRadio from './components/MakeRadio'
@@ -26,10 +26,35 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
     const inputName = getInputName(nestedInputName, input)
     const value = getValues(inputName, props)
 
+    // const refVal = useMemo(() => {
+    //     if (input.ref) {
+    //         // console.log('from ref =>', getValues(input.ref, props))
+    //         return getValues(input.ref, props)
+    //     }
+    // }, [props])
+
+    // useEffect(() => {
+
+    //     if (input.ref) {
+    //         if (!refVal) {
+    //             input.disabled = true
+    //             input.hidden = true
+    //         } else {
+    //             props.setFieldValue(inputName, '')
+    //             input.disabled = false
+    //             input.hidden = false
+    //         }
+    //     }
+
+    // }, [refVal])
     // const inputName = useMemo(() => nestedInputName || input.name, [input])
     // const [field, meta, helpers] = useField(inputName)
     // const { value } = meta;
     // const { setValue } = helpers;
+
+    if(input.type === 'compo'){
+        return input.compo
+    }
 
     if (input.type === "chunk") {
         return <MakeChunk inputName={inputName} input={input} props={props} values={value} />
@@ -87,7 +112,7 @@ export default function MakeInput({ input, props, nestedInputName, style }) {
         return <MakeSwitch input={input} props={props} inputName={inputName} />
     }
     return (
-        <FastField
+        <Field
             as={TextField}
             sx={{
                 display: input.hidden && "none",

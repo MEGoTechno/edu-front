@@ -20,6 +20,9 @@ import { FcQuestions } from "react-icons/fc";
 import { GoArrowRight } from "react-icons/go";
 import TitleSection from '../../components/ui/TitleSection'
 
+import LoaderSkeleton from "../../style/mui/loaders/LoaderSkeleton"
+import { lang } from '../../settings/constants/arlang'
+
 function LecturePage() {
     const theme = useTheme()
 
@@ -74,17 +77,17 @@ function LecturePage() {
         }
     }, [lecture])
 
-    if (!lecture) return <>loading ...</>
+    if (!lecture) return <LoaderSkeleton />
 
     return (
         <Section>
             <FlexBetween sx={{ alignItems: 'flex-start', color: 'neutral.0' }}>
 
-                <FlexColumn sx={{ width: '100%',  maxWidth: '700px', m: '0 auto' }}>
+                <FlexColumn sx={{ width: '100%', maxWidth: '700px', m: '0 auto' }}>
                     {/* video */}
                     <FlexColumn sx={{ width: '100%', minHeight: '86vh' }}>
                         {/* video TV */}
-                        <VideoPlayer v={video} />
+                        <VideoPlayer v={video} thumbnail={lecture.thumbnail.url} />
 
                         {/* video description */}
                         <FlexColumn sx={{ p: '16px 8px', alignItems: 'flex-start', m: '0 auto', width: '100%' }}>
@@ -97,35 +100,35 @@ function LecturePage() {
                     {/* files */}
                     <Box width={"100%"}>
                         {/* <TitleWithDividers title={'files'} /> */}
-                        <TitleSection title={'Files'} />
-                        <Alert variant='filled' severity='warning' sx={{maxWidth: '350px', m: '0 auto'}}>No Files</Alert>
+                        <TitleSection title={lang.FILES} />
+                        <Alert variant='filled' severity='warning' sx={{ maxWidth: '350px', m: '0 auto' }}>لا يوجد ملفات </Alert>
                     </Box>
 
                     <Separator />
 
                     {/* Exams */}
                     <Box width={"100%"}>
-                        <TitleSection title={'Exams'} />
+                        <TitleSection title={lang.EXAMS} />
 
                         <Card sx={{ minWidth: 275, maxWidth: 300, m: "auto" }}>
                             <CardContent>
                                 <Divider sx={{ borderColor: 'primary.main', borderWidth: '2px', width: '60px', my: '16px', borderRadius: '16px' }} />
                                 <Typography variant='h6' gutterBottom>
-                                    Exam Name
+                                    اسم الاختبار
                                 </Typography>
                                 <Divider sx={{ borderColor: 'primary.main', borderWidth: '4px', width: '100%', my: '16px', borderRadius: '16px' }} />
 
                                 <FlexColumn sx={{ alignItems: 'flex-start' }} gap={2}>
-                                    <TabInfo count={'30m'} i={1} title={'Time'} icon={<IoMdTime size={'1.5rem'} />} />
-                                    <TabInfo count={'30m'} i={1} title={'questions'} icon={<FcQuestions size={'1.5rem'} />} />
-                                    <TabInfo count={'2 attempt'} i={1} title={'attempts'} icon={<FcQuestions size={'1.5rem'} />} />
-                                    {/* <TabInfo count={'2 attempt'} i={1} title={'attempts'} icon={<FcQuestions size={'1.5rem'} />} /> */}
+                                    <TabInfo isBold={false} count={'30m'} i={1} title={lang.TIME} icon={<IoMdTime size={'1.5rem'} />} />
+                                    <TabInfo isBold={false} count={'20'} i={1} title={lang.QUESTIONS} icon={<FcQuestions size={'1.5rem'} />} />
+                                    <TabInfo isBold={false} count={'2' + lang.ATTEMPT} i={1} title={lang.ATTEMPTS} icon={<FcQuestions size={'1.5rem'} />} />
+                                    <TabInfo isBold={false} count={'0' + lang.ATTEMPT} i={2} title={lang.YOUR_ATTEMPTS} icon={<FcQuestions size={'1.5rem'} />} />
                                 </FlexColumn>
 
 
                             </CardContent>
                             <CardActions>
-                                <Button size="small" sx={{ width: '100%' }} startIcon={<GoArrowRight size={'1.5rem'} />}>start </Button>
+                                <Button size="small" sx={{ width: '100%' }} startIcon={<GoArrowRight size={'1.5rem'} />}>{lang.START} </Button>
                             </CardActions>
                         </Card>
 
@@ -133,7 +136,7 @@ function LecturePage() {
                 </FlexColumn>
 
                 <Box sx={{ maxWidth: 320 }}>
-                    <TitleWithDividers title={'Other Lecture in Course'} />
+                    <TitleWithDividers title={'المحاضرات الاخرى للكورس'} />
                     <FlexColumn gap={1}>
                         {otherLectures.map((lecture, i) => {
                             return (
@@ -145,7 +148,7 @@ function LecturePage() {
                                             borderRadius: '14px', bgcolor: theme.palette.primary.main + 20
                                         }}
                                         avatar={
-                                            <Avatar sx={{ bgcolor: 'red', width: 56, height: 56  }} aria-label="recipe" src={lecture.thumbnail.url} variant='square' >
+                                            <Avatar sx={{ bgcolor: 'red', width: 56, height: 56 }} aria-label="recipe" src={lecture.thumbnail.url} variant='square' >
                                                 M
                                             </Avatar>
                                         }

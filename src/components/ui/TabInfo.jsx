@@ -9,7 +9,7 @@ function TabInfo({ count, i, title, icon, isBold = true, sx }) {
     const bgColors = ["#1C252E", "rgba(34 197 94 / 0.16)", "rgba(255 171 0 / 0.16)", "rgba(255 86 48 / 0.16)"]
 
 
-    console.log(++m)
+    // console.log(++m)
 
     return (
         <Box

@@ -98,10 +98,10 @@ function GetUsersPage() {
             valueGetter: (params) => params.row?.isActive,
             renderCell: (params) => {
                 return (
-                    <Typography>
+                    <Box>
                         {params.row.isActive ? <TabInfo count={lang.ACTIVE} i={1} />
                             : <TabInfo count={lang.NOT_ACTIVE} i={3} />}
-                    </Typography>
+                    </Box>
                 )
             }
         }, {
@@ -114,6 +114,10 @@ function GetUsersPage() {
             headerName: lang.FAMILY_PHONE,
             width: 200
         }, {
+            field: 'wallet',
+            headerName: lang.WALLET,
+            width: 200
+        }, {
             field: 'role',
             headerName: lang.ROLE,
             type: 'singleSelect',
@@ -123,6 +127,7 @@ function GetUsersPage() {
             field: "grade",
             headerName: lang.GRADE,
             type: 'singleSelect',
+            width: 200,
             valueOptions: makeArrWithValueAndLabel(gradeConstants, { value: 'index', label: 'name' }),
             renderCell: (params) => {
                 const grade = gradeConstants.filter(({ index }) => index === params.row.grade)[0]

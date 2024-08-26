@@ -9,7 +9,7 @@ function DataWith3Items({ icon, title, desc }) {
                 borderRadius: '14px', bgcolor: theme.palette.primary.main + 20, width: '100%'
             }}
             avatar={
-                <Avatar sx={{ bgcolor: 'primary.main' }}>
+                <Avatar sx={{ bgcolor: 'primary.main', color: 'grey.0' }}>
                     {icon}
                 </Avatar>
             }

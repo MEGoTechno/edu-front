@@ -26,7 +26,7 @@ const plyrProps = {
     // Direct props for inner video tag (mdn.io/video)
 }
 
-function VideoPlayer({ v }) {
+function VideoPlayer({ v, thumbnail }) {
 
     const theme = useTheme()
     const vid = useRef(null)
@@ -36,12 +36,12 @@ function VideoPlayer({ v }) {
         title: 'Example title',
         sources: [
             {
-                src: 'https://www.youtube.com/watch?v=r6HJyqxZ_qM',
+                src: v?.url,
                 type: 'video/mp4',
-                provider: 'youtube'
+                // provider: 'youtube'
             },
         ],
-        // poster: '/assets/3rd.jpg',
+        poster: thumbnail,
         // previewThumbnails: {
         //     src: '/assets/3rd.jpg',
         // },

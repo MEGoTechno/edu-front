@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material'
+import { Box, Typography, useTheme, Link as MuiLink } from '@mui/material'
 import React, { useEffect } from 'react'
 import Section from '../../style/mui/styled/Section'
 import BannerAuth from '../../components/ui/BannerAuth'
@@ -7,7 +7,7 @@ import TextBorderAround from '../../components/ui/TextBorderAround'
 
 import { FaFileSignature } from "react-icons/fa6";
 import SignupForm from '../../components/auth/SignupForm'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
@@ -27,7 +27,7 @@ function SignupPage() {
         }
     }, [user, navigate])
 
-    
+
     return (
         <Section sx={{ minHeight: '86vh' }}>
 
@@ -55,7 +55,12 @@ function SignupPage() {
 
                     {/* signup form */}
                     <SignupForm />
-
+                    <FlexRow gap={1}>
+                        <Typography variant='body1'>
+                            لديك حساب ؟
+                        </Typography>
+                        <MuiLink component={Link} to="/login" underline='hover' sx={{ cursor: 'pointer' }}> سجل دخولك الان !</MuiLink>
+                    </FlexRow>
                 </Box>
 
             </FlexRow>

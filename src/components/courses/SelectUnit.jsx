@@ -21,7 +21,6 @@ function SelectUnit({ grade = 'all', value, setValue, reset = [], units, setUnit
 
     const trigger = async () => {
       const unitsRes = await getUnits({ grade: grade ? grade : 'all' }, false)
-      console.log(unitsRes)
       setUnits(unitsRes.units)
       setCounts(unitsRes.count)
     }

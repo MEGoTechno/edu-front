@@ -70,7 +70,7 @@ function ManageCoursesPage() {
                         <ManageCourses grade={grade} activeUnit={activeUnit} activeCourse={activeCourse} setActiveCourse={setActiveCourse} />
                     )}
 
-                    {activeCourse && (
+                    {(activeCourse && activeUnit) && (
                         <Box sx={{ width: '100%' }}>
                             <AdminCourseDetails courseId={activeCourse} />
                         </Box>
@@ -80,7 +80,7 @@ function ManageCoursesPage() {
                     <Separator sx={{ width: '100%' }} />
 
 
-                    {activeCourse && (
+                    {(activeCourse && activeUnit) && (
                         <Box sx={{ width: '100%' }}>
                             <AdminLectures course={activeCourse} unit={activeUnit} grade={grade} />
                         </Box>

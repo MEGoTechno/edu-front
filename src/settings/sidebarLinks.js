@@ -3,7 +3,6 @@ import { LoginIcon, SignupIcon } from "../components/header/Icons";
 import { user_roles } from "./constants/roles";
 import { store } from "../toolkit/store";
 
-
 export const sidebarLinks = [
     {
         name: "تسجيل الدخول", icon: <LoginIcon size="22px" />, to: "/login",
@@ -40,5 +39,9 @@ export const sidebarLinks = [
         name: "انشاء كود", icon: <SignupIcon size="22px" />, to: "/management/codes/create", allowedTo: [user_roles.ADMIN, user_roles.SUBADMIN]
     }, {
         name: "وسايل الدفع", icon: <SignupIcon size="22px" />, to: "/management/payments", allowedTo: [user_roles.ADMIN, user_roles.SUBADMIN]
-    }
+    }, {
+        name: "احصائيات الموقع", icon: <SignupIcon size="22px" />, to: "/not_found", allowedTo: [user_roles.ADMIN, user_roles.SUBADMIN], disabled: true
+    }, {
+        name: "جوجل تاجس و فيس بوك", icon: <SignupIcon size="22px" />, to: "/not_found", allowedTo: [user_roles.ADMIN, user_roles.SUBADMIN], disabled: true
+    },
 ]

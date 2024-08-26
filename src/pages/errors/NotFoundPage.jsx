@@ -34,7 +34,7 @@ function NotFoundPage() {
                 }} />
 
                 <Image img={'https://www.artzstudio.com/content/images/wordpress/2020/05/404-error-not-found-page-lost.png'} width={"100%"} sx={{ maxWidth: "500px" }} />
-                <OutLinedHoverBtn onCLick={onCLick} component={Link} to="/" startIcon={<RtArrow size='1.5rem' />}>go to main page</OutLinedHoverBtn>
+                <OutLinedHoverBtn onClick={onCLick} component={Link} to="/" startIcon={<RtArrow size='1.5rem' />}>go to main page</OutLinedHoverBtn>
             </Box>
         </Section>
 

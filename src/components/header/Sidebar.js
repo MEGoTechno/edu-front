@@ -31,6 +31,7 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
         setModal(false)
         dispatch(setUser(null))
         navigate('/')
+        setSideBar(false)
     }
     const [openModal, setModal] = useState(false)
     return (
