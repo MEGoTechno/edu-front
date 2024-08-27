@@ -44,8 +44,8 @@ export default function ModalStyled({ open, setOpen, title, desc, children, acti
                     <DialogTitle>{title || lang.ARE_YOU_SURE}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            {desc}
                         </DialogContentText>
+                            {desc}
                     </DialogContent>
                 </>)}
                 <DialogActions>

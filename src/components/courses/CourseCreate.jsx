@@ -37,7 +37,7 @@ function CourseCreate({ unit, grade, setCourses }) {
         },
         {
             name: 'name',
-            label: "Course Name"
+            label: lang.COURSE_NAME
         }, {
             name: 'description',
             label: "Course description",
@@ -47,7 +47,8 @@ function CourseCreate({ unit, grade, setCourses }) {
             label: lang.IS_ACTIVE,
             type: 'radio',
             options: [{ value: true, label: lang.ACTIVE }, { value: false, label: lang.NOT_ACTIVE }],
-            icon: <VscSymbolBoolean />
+            icon: <VscSymbolBoolean />,
+            value: true
         }, {
             name: 'price',
             label: lang.PRICE,
@@ -74,7 +75,7 @@ function CourseCreate({ unit, grade, setCourses }) {
 
     return (
         <Section sx={{ minWidth: '250px' }}>
-            <TitleWithDividers title={'Create Unit'} />
+            <TitleWithDividers title={'انشاء كورس'} />
             <MakeForm inputs={inputs} btnWidth={'100%'} onSubmit={onSubmit} status={status} enableReinitialize={true} />
         </Section>
     )

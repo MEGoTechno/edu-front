@@ -12,6 +12,9 @@ import UserHome from './UserHome'
 import { FlexColumn } from '../../style/mui/styled/Flexbox'
 import { LogosYoutubeIcon } from '../../components/ui/svg/Social'
 import { lang } from '../../settings/constants/arlang'
+import ModalStyled from '../../style/mui/styled/ModalStyled'
+import { useEffect, useState } from 'react'
+import { getCookie, setCookie } from '../../hooks/cookies'
 
 const BoxFm = motion(Box)
 const paddingX = {
@@ -29,6 +32,23 @@ function HomePage({ px }) {
 
   const { user } = useSelector(s => s.global)
 
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const checkCookie = () => {
+      const msg = getCookie('msg')
+
+      if (msg) {
+        return
+      } else {
+        setOpen(true)
+        setCookie('msg', true)
+      }
+    }
+
+    checkCookie()
+  }, [])
+
   const theme = useTheme()
   if (user) return <UserHome />
 
@@ -36,6 +56,7 @@ function HomePage({ px }) {
     <Box sx={{
       width: '100%',
     }}>
+
       <Section>
         <Box color={'neutral.0'}>
           <Hero />
@@ -84,6 +105,11 @@ function HomePage({ px }) {
         <Grades />
       </Section>
 
+      <ModalStyled open={open} setOpen={setOpen} title={'بالرجاء قراءه التعليمات, تظهر مره واحده فقط !'} desc={
+        <>
+          <h1>السلام عليكم و رحمة الله وبركاته .</h1><h2>أهلا بك في منصتنا&nbsp;</h2><h4>أنت الأن في وضع المشاهد يمكنك التسجيل باستخدام حساب <mark className="marker-yellow"><u>أدمن </u></mark>أو <mark className="marker-yellow"><u>مشرف </u></mark>أو مستخدم <mark className="marker-yellow"><u>سنتر </u></mark>أو <mark className="marker-yellow"><u>اونلاين&nbsp;</u></mark></h4><h4>أولا الادمن لديك كافة الصلاحيات <i>ولكن </i>صفحة وسايل الدفع ، صفحة احصائيات ، صفحة جوجل تاجس &nbsp;غير متاحه فى وضع المشاهد وذلك لأن البيانات تعتمد هلي عمل المنصه وهي للعرض&nbsp;</h4><h4>يمكنك إنشاء مستخدم , عمل كود و اضافه كورس</h4><h3><strong><u>صفحه الكورسات </u></strong>غير متاح فيها اضافه ملف او عمل اختبار فى وضع المشاهد فقط اضافه محاضره و اضافه صور</h3><h2><strong><u>ملحوظه&nbsp;</u></strong></h2><h4>عتد إضافة محاضره بها فيديو سيظهر خطا لذلك اضغك مره أخري&nbsp;</h4><h4>عند تصفح المنصه و أعجبتك الفكره تواصل معنا ❤️❤️👌</h4>
+        </>
+      } />
     </Box >
   )
 }

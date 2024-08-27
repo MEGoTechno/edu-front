@@ -17,7 +17,7 @@ import { getFullDate } from '../../settings/constants/dateConstants'
 import { useNavigate } from 'react-router-dom'
 import { lang } from '../../settings/constants/arlang'
 
-function CourseSubscribeCard({ course }) {
+function CourseSubscribeCard({ course, isSubscribed, setSubscribed }) {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -26,7 +26,6 @@ function CourseSubscribeCard({ course }) {
     const { data } = useGetOneUserCourseQuery({ course: course._id })
 
 
-    const [isSubscribed, setSubscribed] = useState(false)
     const [userCourse, setUserCourse] = useState(null)
 
     const [open, setOpen] = useState(false)
@@ -71,7 +70,7 @@ function CourseSubscribeCard({ course }) {
 
                     <WrapperHandler status={status} showSuccess={true} />
                 </>}
-            <ModalStyled action={subscribe} open={open} setOpen={setOpen} title={user ? 'هل انت متاكد من الاشتراك بهذا الكوورس ؟' : 'تسجيل الدخول اولا ؟'} desc={user ? `سيتم خصم ${course.price} من محفظتك` : 'الذهاب إلي صفحة تسجيل الدخول !'} />
+            <ModalStyled action={subscribe} open={open} setOpen={setOpen} title={user ? 'هل انت متاكد من الاشتراك بهذا الكورس ؟' : 'تسجيل الدخول اولا ؟'} desc={user ? `سيتم خصم ${course.price} من محفظتك` : 'الذهاب إلي صفحة تسجيل الدخول !'} />
         </CardCourse>
     )
 }

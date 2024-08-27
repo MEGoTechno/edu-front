@@ -16,7 +16,7 @@ export default function useLazyGetData(getData) {
 
     const dispatch = useDispatch()
 
-    const getFromDB = (params, enableCache = true) => {
+    const getFromDB = (params, enableCache = false) => {
 
         return new Promise(async (resolve, reject) => {
             try {

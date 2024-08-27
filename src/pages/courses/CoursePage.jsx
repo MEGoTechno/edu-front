@@ -87,6 +87,7 @@ function CoursePage() {
   }, [course, expand])
 
   //is Subscribed
+  const [isSubscribed, setSubscribed] = useState(false)
 
 
   if (!course) return <LoaderSkeleton />
@@ -105,7 +106,7 @@ function CoursePage() {
         ]}
       >
         {course ?
-          <CourseSubscribeCard course={course} />
+          <CourseSubscribeCard course={course} isSubscribed={isSubscribed} setSubscribed={setSubscribed} />
           : <Loader />}
       </HeaderContent>
 
@@ -120,7 +121,7 @@ function CoursePage() {
           <Grid>
 
             {lectures?.length === 0 ? <Alert variant='filled' severity='warning'>عذرًا، سيتم إضافة المحاضرات قريبا...!</Alert> : lectures.map((lecture, i) => {
-              return <CardHover key={i} img={lecture?.thumbnail?.url || '/assets/3rd.jpg'} title={lecture?.name} desc={<span dangerouslySetInnerHTML={{ __html: lecture.description }} />} to={'lectures/' + lecture._id} >
+              return <CardHover secure={!isSubscribed} key={i} img={lecture?.thumbnail?.url || '/assets/3rd.jpg'} title={lecture?.name} desc={<span dangerouslySetInnerHTML={{ __html: lecture.description }} />} to={'lectures/' + lecture._id} >
                 <FlexColumn>
                   {/* <TabInfo title={'الوقت'} count={'03:00:00'} icon={<AiFillPoundCircle size={'1.5rem'} />} i={0} sx={{ mr: 'auto' }} /> */}
                 </FlexColumn>

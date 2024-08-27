@@ -39,7 +39,7 @@ function UnitCourses({ unit }) {
             {status.isLoading && (
                 <LoaderWithText />
             )}
-            {courses?.length === 0 && (
+            {(courses?.length === 0 && status.isSuccess) && (
                 <Alert variant='filled' severity='warning'> الكورسات هتنزل قريبا, خليك متابع.</Alert>
             )}
             <Grid>

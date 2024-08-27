@@ -60,14 +60,13 @@ function UserCourseDetails({ course, subscribedAt }) {
 
             {/* course Name */}
             <FlexRow>
-                {/* <Typography variant='body1' color={'grey.100'} sx={{opacity: '.7'}}>Course Name: </Typography> */}
-                <Typography variant='h6' color={'neutral.0'}> {course.name}</Typography>
+                <Typography variant='h6'  color={'neutral.0'}> {course.name}</Typography>
             </FlexRow>
 
         </Button>}
             // btn2={!subscribedAt && (<OutLinedHoverBtn sx={{ width: '100%' }} endIcon={<MdOutlinePayment />} >subsrcibe</OutLinedHoverBtn>)}
             btn1={
-                <FilledHoverBtn FilledHoverBtn sx={{ width: '100%' }} component={Link} to={"courses/" + course.index} onClick={goCourse} endIcon={< FaArrowRight />} > الذهاب للكورس  </FilledHoverBtn >
+                <FilledHoverBtn sx={{ width: '100%' }} component={Link} to={"courses/" + course.index} onClick={goCourse} endIcon={< FaArrowRight />} > الذهاب للكورس  </FilledHoverBtn >
             }>
 
             <FlexColumn>

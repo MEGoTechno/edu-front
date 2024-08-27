@@ -41,7 +41,6 @@ function AdminCourseDetails({ courseId }) {
     if (status.isSuccess && !course) return <Alert variant="filled" severity="warning" sx={{ justifyContent: 'center' }}>
         {lang.NO_COURSES_IN_THIS_UNIT}
     </Alert>
-
     if (course)
         return (
             <>
@@ -50,7 +49,7 @@ function AdminCourseDetails({ courseId }) {
 
                     <FlexBetween width={"100%"}>
                         <OutLinedHoverBtn sx={{ my: '12px' }} colorm='orange' endIcon={<FcStatistics />}>{lang.STATISTICS}</OutLinedHoverBtn>
-                        <TabInfo count={subscribers?.values?.count || Number(subscribers?.values?.count) === 0 ? 0 : "يتم التحميل"} title={lang.SUBSCRIBERS_NUMS} i={2} />
+                        <TabInfo count={subscribers?.values?.count || 0} title={lang.SUBSCRIBERS_NUMS} i={2} />
                         <TabInfo count={course?.isActive ? lang.ACTIVE : lang.NOT_ACTIVE} title={lang.IS_ACTIVE} i={1} />
                         <TabInfo count={course.price + " " + lang.POUND} title={lang.PRICE} i={0} />
                         <TabInfo count={getFullDate(course.createdAt)} title={'تاريخ الانشاء'} i={1} />

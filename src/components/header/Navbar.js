@@ -61,7 +61,6 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
     //     return () => window.removeEventListener('scroll', handleScroll);
     // }, [])
 
-
     return (
         <AppBar sx={{
             position: 'sticky', top: 0,
@@ -103,8 +102,8 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
                                     // boxShadow: theme.shadows[2],background: 'none'
                                 }
                             }}>
-                                <Typography variant='subtitle1' mr={'5px'}>الدخول</Typography>
                                 <Typography variant='subtitle2' color={'neutral.0'}>تسجيل</Typography>
+                                <Typography variant='subtitle1' ml={'5px'}>الدخول</Typography>
                             </Button>
 
                             <StyledBtn component={Link} to="/signup" endIcon={<SignupIcon />}>انشاء حساب</StyledBtn>
@@ -113,7 +112,7 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
 
                     {user?.role && (
                         <>
-                            {user.role === user_roles.ONLINE && (
+                            {(user.role === user_roles.ONLINE || user.role === user_roles.STUDENT) && (
                                 <Tooltip title={lang.WALLET} placement="top">
                                     <IconButton size='large'>
                                         <Badge badgeContent={user.wallet || 0} color='warning' max={5000}>
@@ -122,6 +121,7 @@ function Navbar({ setSidebar, isOpenedSidebar, isMobileScreen }) {
                                     </IconButton>
                                 </Tooltip>
                             )}
+
                             <IconButton >
                                 <NotificationsIcon sx={{
                                     color: 'primary.main'

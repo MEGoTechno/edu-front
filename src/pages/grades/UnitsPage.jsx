@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Section from '../../style/mui/styled/Section'
-import { Avatar, Box, Button, Chip, Divider, Typography, useTheme } from '@mui/material'
+import { Alert, Avatar, Box, Button, Chip, Divider, Typography, useTheme } from '@mui/material'
 import { FlexBetween, FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
 import CardInfo from '../../style/mui/components/CardInfo'
 import gradeConstants from '../../settings/constants/gradeConstants'
@@ -66,6 +66,9 @@ function UnitsPage() {
       <Box minHeight={'100vh'} sx={{ padding: '8px' }}>
         <TitleSection title={lang.GRADE_CONTENT} />
 
+        {(status.isSuccess && units?.length === 0) && (
+          <Alert variant='filled' severity='warning'>الوحدات هتنزل قريب , خليك متابع !</Alert>
+        )}
 
         {status.isLoading ? <LoaderSkeleton /> :
           <>

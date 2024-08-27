@@ -75,7 +75,7 @@ export const lang = {
     START:"ابدا",
     //errors
     REQUERIED: 'مطلوب',
-    ARE_YOU_SURE: "هل انت متاكد...؟",
+    ARE_YOU_SURE: "هل انت متاكد ؟",
     AGREE: 'موافق',
     DISAGREE: 'غير موافق'
 }

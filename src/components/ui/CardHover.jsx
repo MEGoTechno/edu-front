@@ -4,7 +4,7 @@ import { DeviconUnity, UnitIcon } from '../grades/Icons'
 import { FlexColumn, FlexRow } from '../../style/mui/styled/Flexbox'
 import { Link } from 'react-router-dom'
 
-function CardHover({ img, title, desc, to, children }) {
+function CardHover({ img, title, desc, to, children, secure = false }) {
 
     const theme = useTheme()
 
@@ -33,7 +33,11 @@ function CardHover({ img, title, desc, to, children }) {
                 '&:hover:before': {
                     left: " 180%"
                 }
-            }} component={Link} to={to}>
+            }} component={Link} to={to} onClick={(e) => {
+                if (secure) {
+                    e.preventDefault()
+                }
+            }}>
                 <CardMedia
                     component="img"
                     image={img || '#'}

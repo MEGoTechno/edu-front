@@ -25,14 +25,14 @@ function UnitCreate({ grade, setUnits }) {
         },
         {
             name: 'name',
-            label: "Grade Name"
+            label: "اسم الوحده"
         },
     ]
 
 
     return (
         <Section sx={{ minWidth: '250px' }}>
-            <TitleWithDividers title={'Create Unit'} />
+            <TitleWithDividers title={'انشاء وحده لهذا الصف'} />
             <MakeForm inputs={inputs} btnWidth={'100%'} onSubmit={onSubmit} status={status} enableReinitialize={true} />
         </Section>
     )

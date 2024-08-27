@@ -9,9 +9,13 @@ import useLazyGetData from '../../hooks/useLazyGetData'
 import usePostData from '../../hooks/usePostData'
 import ModalStyled from '../../style/mui/styled/ModalStyled'
 import CreateCode from '../../components/codes/CreateCode'
-import { Button } from '@mui/material'
+import { Alert, Button } from '@mui/material'
 import { FilledHoverBtn } from '../../style/mui/btns/buttonsStyles'
 import { FlexColumn } from '../../style/mui/styled/Flexbox'
+import DataWith3Items from '../../components/ui/DataWith3Items'
+import Grid from '../../style/vanilla/Grid'
+import TabInfo from '../../components/ui/TabInfo'
+import Separator from '../../components/ui/Separator'
 
 
 function GetCodesPage() {
@@ -23,7 +27,6 @@ function GetCodesPage() {
 
     const fetchFc = async (params) => {
         const res = await getCodes(params, false)
-        console.log(res)
         const codes = { values: res.codes, count: res.count }
         return codes
     }
@@ -45,6 +48,8 @@ function GetCodesPage() {
         await deleteCode({ _id: id })
     }
 
+    const [usedBy, setUsedby] = useState([])
+    const [openUsedBy, setOpenUsedBy] = useState(false)
     const columns = [
         {
             field: 'code',
@@ -65,13 +70,24 @@ function GetCodesPage() {
             field: 'type',
             headerName: 'نوع الكود',
             type: 'singleSelect',
-            width: 170}
-            // }, {
-            //     field: 'usedBy',
-            //     headerName: "used by",
-            //     width: 170,
-            // }, {
-            ,{
+            width: 170
+        }
+        , {
+            field: 'usedBy',
+            headerName: "used by",
+            width: 170,
+            renderCell: (params) => {
+                return (
+                    <Button onClick={() => {
+                        console.log(params.row.usedBy)
+                        setUsedby(params.row.usedBy)
+                        setOpenUsedBy(true)
+                    }}>
+                        عرض المستخدمين
+                    </Button >
+                )
+            }
+        }, {
             field: 'isActive',
             headerName: "الحاله",
             type: "boolean",
@@ -80,7 +96,7 @@ function GetCodesPage() {
 
         }, {
             field: 'numbers',
-            headerName: "عدد مرات الاستخدام",
+            headerName: "عدد مرات الاستخدام الباقيه",
             width: 170,
             editable: true
         },
@@ -90,10 +106,10 @@ function GetCodesPage() {
     const [open, setOpen] = useState(false)
     return (
         <Section>
-            <TitleWithDividers title={'codes page'} />
+            <TitleWithDividers title={'صفحه الاكواد'} />
 
             <FlexColumn>
-                <FilledHoverBtn onClick={() => setOpen(true)}>create code</FilledHoverBtn>
+                <FilledHoverBtn onClick={() => setOpen(true)}>انشاء كود</FilledHoverBtn>
             </FlexColumn>
 
             <MeDatagrid type={'crud'} columns={columns} reset={reset}
@@ -103,6 +119,23 @@ function GetCodesPage() {
 
             <ModalStyled open={open} setOpen={setOpen} >
                 <CreateCode setReset={setReset} />
+            </ModalStyled>
+
+            <ModalStyled open={openUsedBy} setOpen={setOpenUsedBy}>
+                <Section>
+                    <TabInfo count={'عدد مرات الاستخدام' + " " + usedBy.length + " " + "مرات"} i={1} />
+                    <Separator />
+                    <TitleWithDividers title={'المستخدمون'} />
+                    {usedBy.length !== 0 ? (
+                        <Grid>
+                            {usedBy.map((user, i) => (
+                                <DataWith3Items key={i} title={user?.name} src={user?.avatar?.url || false} />
+                            ))}
+                        </Grid>
+                    ) : (
+                        <Alert variant='filled' severity='warning'>لم يتم استخدامه حتى الان !</Alert>
+                    )}
+                </Section>
             </ModalStyled>
         </Section>
     )
