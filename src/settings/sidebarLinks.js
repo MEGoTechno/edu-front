@@ -16,7 +16,7 @@ export const sidebarLinks = [
     }, {
         name: "اداره الحساب", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
-        name: "حسابى", icon: <SignupIcon size="22px" />, to: "/profile", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
+        name: "حسابى", icon: <SignupIcon size="22px" />, to: "/user/profile", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
         name: "شحن كود", icon: <SignupIcon size="22px" />, to: "/user/recharge_code", allowedTo: [user_roles.STUDENT, user_roles.ONLINE]
     }, {
