@@ -33,7 +33,6 @@ function UserProfilePage() {
         const res = await updateProfile(values, true)
         dispatch(setUser({ ...user, ...res }))
     }
-
     const inputs = [
 
         {

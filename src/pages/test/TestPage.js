@@ -5,6 +5,7 @@ import { FlexColumn } from '../../style/mui/styled/Flexbox'
 
 import { Fm } from "./Fm.js"
 import TestDate from './TestDate.jsx'
+import Encrypt from './Encrypt.jsx'
 
 // in framer motion ===> varient and initial and animate to parent 
 // only varient for child but has same object properties(keys) in parent
@@ -23,6 +24,22 @@ const btn = {
 const BoxFm = motion(Box)
 
 function TestPage() {
+
+
+
+
+
+  console.log('hello test')
+
+
+
+
+
+
+
+
+
+
 
   const [isTrue, setTrue] = useState(false)
 
@@ -75,7 +92,7 @@ function TestPage() {
   // dir
   return (
     <FlexColumn position={'relative'}>
-
+      <Encrypt />
       <TestDate />
 
       <BoxFm ref={targetRef}
