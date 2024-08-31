@@ -1,10 +1,13 @@
 import HomePage from "../../pages/home/HomePage";
 import TestPage from "../../pages/test/TestPage";
 import Layout from "../../pages/Layout";
+import PaymentsPage from "../../pages/subscribtions/PaymentsPage";
+import { lazy, Suspense, useEffect, useState } from 'react'
+
 import ErrorPage from "../../pages/errors/ErrorPage";
 
-import LoginPage from "../../pages/auth/LoginPage";
-import SignupPage from "../../pages/auth/SignupPage";
+// import LoginPage from "../../pages/auth/LoginPage";
+// import SignupPage from "../../pages/auth/SignupPage";
 
 import GradesPage from "../../pages/grades/GradesPage";
 import UnitsPage from "../../pages/grades/UnitsPage";
@@ -19,7 +22,9 @@ import LectureCreate from "../../components/courses/LectureCreate";
 import { userRoutes } from "./userRoutes";
 import NotFoundPage from "../../pages/errors/NotFoundPage";
 import { subscriptions } from "./subscriptions";
-import PaymentsPage from "../../pages/subscribtions/PaymentsPage";
+
+const LoginPage = lazy(() => import("../../pages/auth/LoginPage"))
+const SignupPage = lazy(() => import("../../pages/auth/SignupPage"))
 
 export const routes = [
     {

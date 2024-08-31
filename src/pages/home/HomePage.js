@@ -16,6 +16,9 @@ import ModalStyled from '../../style/mui/styled/ModalStyled'
 import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from '../../hooks/cookies'
 
+//lazy(()=> import(path))
+//lazy best used for compo will appear not started
+
 const BoxFm = motion(Box)
 const paddingX = {
   xs: '-10px',
