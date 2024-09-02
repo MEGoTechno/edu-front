@@ -9,22 +9,29 @@ import ErrorPage from "../../pages/errors/ErrorPage";
 // import LoginPage from "../../pages/auth/LoginPage";
 // import SignupPage from "../../pages/auth/SignupPage";
 
-import GradesPage from "../../pages/grades/GradesPage";
-import UnitsPage from "../../pages/grades/UnitsPage";
-import CoursePage from "../../pages/courses/CoursePage";
-import LecturePage from "../../pages/lectures/LecturePage";
+// import CoursePage from "../../pages/courses/CoursePage";
+// import LecturePage from "../../pages/lectures/LecturePage";
+
+// import NotFoundPage from "../../pages/errors/NotFoundPage";
+// import LectureCreate from "../../components/courses/LectureCreate";
+
 import gradesRoutes from "./gradesRoutes";
 import { manageUserRoutes } from "./manageUserRoutes";
 import { manageCoursesRoutes } from "./manageCoursesRoutes";
 
 import { codesRoutes } from "./codesRoutes";
-import LectureCreate from "../../components/courses/LectureCreate";
 import { userRoutes } from "./userRoutes";
-import NotFoundPage from "../../pages/errors/NotFoundPage";
 import { subscriptions } from "./subscriptions";
 
 const LoginPage = lazy(() => import("../../pages/auth/LoginPage"))
 const SignupPage = lazy(() => import("../../pages/auth/SignupPage"))
+
+const CoursePage = lazy(() => import("../../pages/courses/CoursePage"))
+const LecturePage = lazy(() => import("../../pages/lectures/LecturePage"))
+const LectureCreate = lazy(() => import("../../components/courses/LectureCreate"))
+const NotFoundPage = lazy(() => import("../../pages/errors/NotFoundPage"))
+
+
 
 export const routes = [
     {

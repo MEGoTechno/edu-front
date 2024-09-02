@@ -1,8 +1,10 @@
 
-import ManageCoursesPage from "../../pages/management/ManageCoursesPage";
+import { lazy } from "react";
 import { user_roles } from "../constants/roles";
 import ProtectedRoute from "./ProtectedRoute";
 
+// import ManageCoursesPage from "../../pages/management/ManageCoursesPage";
+const ManageCoursesPage = lazy(() => import("../../pages/management/ManageCoursesPage"))
 
 export const manageCoursesRoutes = [
     {

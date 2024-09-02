@@ -1,8 +1,14 @@
-import RechargeCodePage from "../../pages/codes/RechargeCodePage";
-import UserPayments from "../../pages/users/UserPayments";
-import UserProfilePage from '../../pages/users/UserProfilePage'
+import { lazy } from "react";
 import { user_roles } from "../constants/roles";
 import ProtectedRoute from "./ProtectedRoute";
+
+// import RechargeCodePage from "../../pages/codes/RechargeCodePage";
+// import UserPayments from "../../pages/users/UserPayments";
+// import UserProfilePage from '../../pages/users/UserProfilePage'
+const RechargeCodePage = lazy(() => import("../../pages/codes/RechargeCodePage"))
+const UserPayments = lazy(() => import("../../pages/users/UserPayments"))
+const UserProfilePage = lazy(() => import('../../pages/users/UserProfilePage'))
+
 
 export const userRoutes = [
     {
