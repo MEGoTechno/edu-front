@@ -30,7 +30,7 @@ const CoursePage = lazy(() => import("../../pages/courses/CoursePage"))
 const LecturePage = lazy(() => import("../../pages/lectures/LecturePage"))
 const LectureCreate = lazy(() => import("../../components/courses/LectureCreate"))
 const NotFoundPage = lazy(() => import("../../pages/errors/NotFoundPage"))
-
+const GetTokensPage = lazy(() => import("../../pages/tokens/GetTokensPage"))
 
 
 export const routes = [
@@ -62,6 +62,8 @@ export const routes = [
                 path: '/management/lectures/create', element: <LectureCreate />
             }, {
                 path: '/management/payments', element: <PaymentsPage />
+            }, {
+                path: '/management/tokens', element: <GetTokensPage />
             }, {
                 path: '/login', element: <LoginPage />
             }, {

@@ -58,6 +58,13 @@ const usersApi = apiSlice.injectEndpoints({
                 body: data
             }),
         }),
+        logout: builder.query({
+            query: () => {
+                return {
+                    url: "/auth/logout"
+                }
+            },
+        }),
     }),
     overrideExisting: false,
 })
@@ -74,5 +81,6 @@ export const {
 
     // for auth
     useLoginMutation,
-    useSignupMutation
+    useSignupMutation,
+    useLazyLogoutQuery
 } = usersApi

@@ -285,12 +285,11 @@ function CrudDatagrid({ filterParams = [], reset, columns, editing, fetchFc, loa
                 sx={{
                     bgcolor: 'background.default',
                     height: '70vh',
-                    width: '100%',
                     color: 'neutral.0',
                     borderRadius: '16px',
                     border: 'none',
                     boxShadow: theme.shadows[1],
-                    "&  .muirtl-yrdy0g-MuiDataGrid-columnHeaderRow": {
+                    "&  .muirtl-1iyq7zh-MuiDataGrid-columnHeaders": {
                         bgcolor: 'background.alt', my: '8px', color: 'neutral.0' //28323D
                     }
                 }}

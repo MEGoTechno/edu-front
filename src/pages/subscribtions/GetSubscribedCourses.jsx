@@ -102,6 +102,7 @@ function GetSubscribedCourses() {
         }, {
             field: 'subscribedAt',
             headerName: 'تاريخ الاشتراك',
+            width: 200,
             renderCell: (params) => {
                 return (
                     <Box>

@@ -18,6 +18,8 @@ import { ErrorBtn } from '../../style/mui/btns/buttonsStyles';
 import ModalStyled from '../../style/mui/styled/ModalStyled';
 import { setUser } from '../../toolkit/globalSlice';
 import { lang } from '../../settings/constants/arlang';
+import { useLazyLogoutQuery } from '../../toolkit/apis/usersApi';
+import Loader from '../../style/mui/loaders/Loader';
 
 
 export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, sideBarWidth }) {
@@ -27,8 +29,10 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
     const navigate = useNavigate()
     const user = useSelector(s => s.global.user)
 
-    const logout = () => {
+    const [logoutFc, { isLoading }] = useLazyLogoutQuery()
+    const logout = async () => {
         setModal(false)
+        await logoutFc()
         dispatch(setUser(null))
         navigate('/')
         setSideBar(false)
@@ -63,10 +67,10 @@ export default function Sidebar({ isOpenedSideBar, setSideBar, isMobileScreen, s
 
                 {/* logout */}
                 {user && <Box display="flex" alignItems="end" mt={'auto'} >
-                    <ErrorBtn sx={{ mx: "10px", width: '100%' }} onClick={(() => {
+                    <ErrorBtn sx={{ mx: "10px", width: '100%' }} disabled={isLoading} onClick={(() => {
                         setModal(true)
                     })} >
-                        {lang.LOGOUT}
+                        {isLoading ? <Loader /> : lang.LOGOUT}
                     </ErrorBtn>
                 </Box>}
 

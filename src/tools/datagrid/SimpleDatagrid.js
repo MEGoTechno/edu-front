@@ -9,10 +9,13 @@ export default function SimpleDatagrid({ rows, columns, loading = false }) {
         <DataGrid
             rows={rows}
             columns={columns}
+
             loading={loading}
             getRowId={(param) => param?._id}
 
             pageSizeOptions={[5, 10, 50, 100]}
+
+            sx={{ height: '70vh'}}
         />
     )
 }
