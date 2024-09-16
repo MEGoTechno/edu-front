@@ -13,8 +13,8 @@ import { LogosFacebook, LogosTelegram, LogosYoutubeIcon, SkillIconsInstagram } f
 import { Link } from 'react-router-dom';
 
 const LOGO_DR = 'أ/'
-const LOGO_FIRST_NAME = 'محمود'
-const LOGO_SECOND_NAME = 'العوضى'
+const LOGO_FIRST_NAME = 'إبراهيم'
+const LOGO_SECOND_NAME = 'علام'
 
 
 function HeroContent() {
